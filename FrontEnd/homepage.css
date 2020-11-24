@@ -1,0 +1,39 @@
+#search-input-field {
+    border-radius: 30px;
+    text-align: center;
+    line-height: 2;
+    border: darkgray 1px solid;
+    outline: none;
+    display: block;
+    margin: 0 auto;
+    font-size: 25px;
+    margin-top: 40px;
+}
+
+#submit-button {
+    height: 50px;
+    display: block;
+    border-radius: 25px;
+    color:white;
+    outline: none;
+    border: none;
+    background: lightslategrey;
+    margin: 0 auto;
+    margin-top: 30px;
+    font-size: 20px;
+    cursor: pointer;
+    width: 100px;
+}
+
+#project-title {
+    display: flex;
+    justify-content: center;
+    font-size: 50px;
+}
+
+#result{
+    margin-top: 50px;
+    display: flex;
+    justify-content: center;
+    font-size: 50px;
+}
