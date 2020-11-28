@@ -20,11 +20,11 @@ public class Main {
             list.add(arr);
             String res = Cracker.findPassword(list, message);
             System.out.println(res);
-            OutputStream outputStream = socket.getOutputStream();
-            BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(outputStream));
-            bw.write(res);
-            bw.flush();
-            outputStream.close();
+//            OutputStream outputStream = socket.getOutputStream();
+//            BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(outputStream));
+//            bw.write(res);
+//            bw.flush();
+//            outputStream.close();
         } catch (Exception e) {
             e.printStackTrace();
         }
