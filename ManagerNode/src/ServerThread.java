@@ -20,8 +20,8 @@ public class ServerThread implements Runnable{
             System.out.println("Receive message:" + message);
 
             message = message.split(" ")[1];
-            String key = message.substring(6, 11);
-            int id = Integer.parseInt(message.substring(15));
+            String key = message.substring(6, 38);
+            int id = Integer.parseInt(message.substring(41));
 
             String res = "The key is: " + key + " and the id is: " + id;
 
