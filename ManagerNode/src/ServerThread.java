@@ -1,7 +1,5 @@
 import java.io.*;
 import java.net.Socket;
-import java.util.HashMap;
-import java.net.http.HttpResponse;
 
 public class ServerThread implements Runnable{
     private Socket socket;
@@ -24,6 +22,13 @@ public class ServerThread implements Runnable{
             int id = Integer.parseInt(message.substring(42));
 
             String res = "The key is: " + key + " and the id is: " + id;
+
+            Socket s = new Socket("10.10.1.2", 58111);
+            OutputStream outputStreamWorker = s.getOutputStream();
+            BufferedWriter bwWorker = new BufferedWriter(new OutputStreamWriter(outputStreamWorker));
+            bwWorker.write(key);
+            bwWorker.flush();
+            outputStreamWorker.close();
 
             String response = "";
             response += "HTTP/1.1 200 OK\n";
