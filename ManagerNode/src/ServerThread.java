@@ -31,7 +31,7 @@ public class ServerThread implements Runnable{
             response += "Content-Type: text\\plain\n";
 //            response += "Last-Modified: Mon, 11 Jan 1998 13:23:42 GMT\n";
 //            response += "Accpet-ranges: bytes";
-            response += "Content-Length: " + res.length();
+            response += "Content-Length: " + res.length() + '\n';
             response += "\n";
             response += res;
 
