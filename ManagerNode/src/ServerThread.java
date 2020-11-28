@@ -27,11 +27,12 @@ public class ServerThread implements Runnable{
 
             String response = "";
             response += "HTTP/1.1 200 OK\n";
+            response += "Access-Control-Allow-Origin:*\n";
 //            response += "Server: Sunpache 1.0\n";
             response += "Content-Type: text\\plain\n";
 //            response += "Last-Modified: Mon, 11 Jan 1998 13:23:42 GMT\n";
 //            response += "Accpet-ranges: bytes";
-            response += "Content-Length: " + res.length() + '\n';
+//            response += "Content-Length: " + res.length() + '\n';
             response += "\n";
             response += res;
 

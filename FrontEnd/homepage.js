@@ -2,24 +2,16 @@ const form = document.getElementById('user-amount-form');
 const inputField = document.getElementById('user-amount-input-field');
 const baseURL = 'pcvm3-10.instageni.illinois.edu';
 
-const getRequest = (requestURl) => {
-    return new Promise((resolve, reject) => {
-        fetch(requestURl, {
-            mode: 'no-cors',
-        })
-        .then(response => {
-            if (response.ok) {
-                return response.text();
-            }
-        })
-        .then(body => {
-            resolve(body);
-        })
-        .catch(err => {
-            reject(err);
-        });
-    })
-}
+async function getData(url = '') {
+    // Default options are marked with *
+    const response = await fetch(url, {
+      method: 'GET', 
+      mode: 'cors',
+      cache: 'no-cache',
+      credentials: 'same-origin', 
+    });
+    return response;
+  }
 
 const checkPassword = (password) => {
     let reg = /^[a-zA-Z]*$/;
@@ -69,11 +61,14 @@ form.onsubmit = (event) => {
             if (!checkPassword(password)) {
                 alert('Password must be characters.');
             } else {
-                const queryURL = `http://${baseURL}:58111?key=${password}&id=${i}`;
-                getRequest(queryURL).then((res) => {
+                const queryURL = `http://${baseURL}:58888?key=${password}&id=${i}`;
+                // getRequest(queryURL).then((res) => {
+                //     console.log(res);
+                // })
+                getData(queryURL).then(res => {
                     console.log(res);
                 })
-            }
+            }   
         }
     }
 }
