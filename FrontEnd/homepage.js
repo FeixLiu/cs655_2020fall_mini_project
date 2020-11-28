@@ -1,9 +1,32 @@
-
 const form = document.getElementById('user-amount-form');
 const inputField = document.getElementById('user-amount-input-field');
+const baseURL = 'pcvm3-10.instageni.illinois.edu';
+
+const getRequest = (requestURl) => {
+    return new Promise((resolve, reject) => {
+        fetch(requestURl)
+        .then(response => {
+            if (response.ok) {
+                return response.json();
+            }
+        })
+        .then(body => {
+            resolve(body);
+        })
+        .catch(err => {
+            reject(err);
+        });
+    })
+}
+
+const checkPassword = (password) => {
+    let reg = /^[a-zA-Z]*$/;
+    return reg.test(password);
+}
 
 form.onsubmit = (event) => {
     event.preventDefault();
+
     // clear previous forms
     const forms = document.querySelectorAll('.password-form');
     for (let i = 0; i < forms.length; i++) {
@@ -11,6 +34,7 @@ form.onsubmit = (event) => {
     }
     
     const userNum = inputField.value;
+    
     // create lists
     for (let i = 0; i < userNum; i++) {
         const form = document.createElement('form');
@@ -36,13 +60,22 @@ form.onsubmit = (event) => {
         form.appendChild(submitBtn);
         form.appendChild(result);
 
-        form.onclick = function(e) {
+        form.onsubmit = function(e) {
             e.preventDefault();
             const password = input.value;
-            
-            // TODO: send this password to backend and wait, use async to wait it.
-            const resultEle = document.getElementsByClassName('password-crack-result')[i];
-            resultEle.textContent = `Result: ${password}`;
+
+            if (!checkPassword(password)) {
+                alert('Password must be characters.');
+            } else {
+                const socket = io(`http://${baseURL}:58111`);
+                socket.on('send password', () => {
+                    socket.emit('user_login', {
+                        userID: i,
+                        socketId: socket.id,
+                        password: password
+                    });
+                });
+            }
         }
     }
 }
