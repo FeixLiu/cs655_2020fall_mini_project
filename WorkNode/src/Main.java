@@ -14,7 +14,6 @@ public class Main {
             BufferedReader br = new BufferedReader(new InputStreamReader(inputStream));
             String message = br.readLine();
             System.out.println("Receive message: " + message);
-            inputStream.close();
             String[] arr = {"aaaaa", "ZZZZZ"};
             List<String[]> list = new ArrayList<>();
             list.add(arr);
@@ -25,6 +24,7 @@ public class Main {
             bw.write(res);
             bw.flush();
             outputStream.close();
+            inputStream.close();
         } catch (Exception e) {
             e.printStackTrace();
         }
