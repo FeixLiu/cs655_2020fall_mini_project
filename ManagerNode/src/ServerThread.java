@@ -27,6 +27,7 @@ public class ServerThread implements Runnable{
 
             String response = "";
             response += "HTTP/1.1 200 OK\n";
+            response += "Access-Control-Allow-Origin:*\n";
             response += "Content-Type: text\\plain\n";
             response += "Content-Length: " + res.length() + '\n';
             response += "\n";

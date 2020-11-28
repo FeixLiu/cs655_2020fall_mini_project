@@ -5,7 +5,7 @@ const baseURL = 'pcvm3-10.instageni.illinois.edu';
 const getRequest = (requestURl) => {
     return new Promise((resolve, reject) => {
         fetch(requestURl, {
-            mode: 'no-cors',
+            mode: 'cors',
         })
         .then(response => {
             if (response.ok) {
@@ -69,11 +69,11 @@ form.onsubmit = (event) => {
             if (!checkPassword(password)) {
                 alert('Password must be characters.');
             } else {
-                const queryURL = `http://${baseURL}:58111?key=${password}&id=${i}`;
+                const queryURL = `http://${baseURL}:58888?key=${password}&id=${i}`;
                 getRequest(queryURL).then((res) => {
                     console.log(res);
                 })
-            }
+            }   
         }
     }
 }
