@@ -13,19 +13,20 @@ public class Main {
             InputStream inputStream = socket.getInputStream();
             BufferedReader br = new BufferedReader(new InputStreamReader(inputStream));
             String message = br.readLine();
-            System.out.println("Receive message:" + message);
+            System.out.println("Receive message: " + message);
             inputStream.close();
+            String[] arr = {"aaaaa", "ZZZZZ"};
+            List<String[]> list = new ArrayList<>();
+            list.add(arr);
+            String res = Cracker.findPassword(list, message);
+            System.out.println(res);
+            OutputStream outputStream = socket.getOutputStream();
+            BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(outputStream));
+            bw.write(res);
+            bw.flush();
+            outputStream.close();
         } catch (Exception e) {
             e.printStackTrace();
         }
-
-//        String str = "bbbbb";
-//        String md5 = Utils.encryptMD5(str);
-//        String[] arr = {"aaaaa", "aaaaa"};
-//        List<String[]> list = new ArrayList<>();
-//        list.add(arr);
-////        list.add(arr2);
-//        String res = Cracker.findPassword(list,md5);
-//        System.out.println("res:" + res);
     }
 }

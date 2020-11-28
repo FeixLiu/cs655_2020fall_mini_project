@@ -15,13 +15,11 @@ public class ServerThread implements Runnable{
             InputStream inputStream = socket.getInputStream();
             BufferedReader br = new BufferedReader(new InputStreamReader(inputStream));
             String message = br.readLine();
-            System.out.println("Receive message:" + message);
+            System.out.println("Receive message: " + message);
 
             message = message.split(" ")[1];
             String key = message.substring(6, 38);
             int id = Integer.parseInt(message.substring(42));
-
-            String res = "The key is: " + key + " and the id is: " + id;
 
             Socket s = new Socket("10.10.1.2", 58111);
             OutputStream outputStreamWorker = s.getOutputStream();
@@ -29,7 +27,12 @@ public class ServerThread implements Runnable{
             bwWorker.write(key);
             bwWorker.flush();
             outputStreamWorker.close();
+            InputStream inputStreamWorker = socket.getInputStream();
+            BufferedReader brWorker = new BufferedReader(new InputStreamReader(inputStreamWorker));
+            String rst = brWorker.readLine();
+            System.out.println("Get result for: " + key + " is: "  + rst);
 
+            String res = "The result is: " + rst + " and the id is: " + id;
             String response = "";
             response += "HTTP/1.1 200 OK\n";
             response += "Access-Control-Allow-Origin:*\n";
