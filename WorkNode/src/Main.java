@@ -7,14 +7,17 @@ import java.net.Socket;
 public class Main {
 
     public static void main(String[] args){
-
-        ServerSocket serverSocket = new ServerSocket(58111);
-        Socket socket = serverSocket.accept();
-        InputStream inputStream = socket.getInputStream();
-        BufferedReader br = new BufferedReader(new InputStreamReader(inputStream));
-        String message = br.readLine();
-        System.out.println("Receive message:" + message);
-        inputStream.close();
+        try {
+            ServerSocket serverSocket = new ServerSocket(58111);
+            Socket socket = serverSocket.accept();
+            InputStream inputStream = socket.getInputStream();
+            BufferedReader br = new BufferedReader(new InputStreamReader(inputStream));
+            String message = br.readLine();
+            System.out.println("Receive message:" + message);
+            inputStream.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
 
 //        String str = "bbbbb";
 //        String md5 = Utils.encryptMD5(str);
