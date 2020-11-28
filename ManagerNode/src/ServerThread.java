@@ -23,14 +23,17 @@ public class ServerThread implements Runnable{
             String key = message.substring(6, 11);
             int id = Integer.parseInt(message.substring(15));
 
+            String res = "The key is: " + key + " and the id is: " + id;
+
             String response = "";
             response += "HTTP/1.1 200 OK\n";
             response += "Server: Sunpache 1.0\n";
             response += "Content-Type: text\\html\n";
             response += "Last-Modified: Mon, 11 Jan 1998 13:23:42 GMT\n";
             response += "Accpet-ranges: bytes";
+            response += "Content-Length: " + res.length();
             response += "\n\n";
-            response += "The key is: " + key + " and the id is: " + id;
+            response += res;
 
             System.out.println(response);
 
