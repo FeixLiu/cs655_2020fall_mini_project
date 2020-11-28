@@ -1,6 +1,7 @@
 import java.io.*;
 import java.net.Socket;
 import java.util.HashMap;
+import java.net.http.HttpResponse;
 
 public class ServerThread implements Runnable{
     private Socket socket;
@@ -14,26 +15,29 @@ public class ServerThread implements Runnable{
         try {
             // read the message sent from the client
             InputStream inputStream = socket.getInputStream();
-            String ip = socket.getRemoteSocketAddress().toString();
             BufferedReader br = new BufferedReader(new InputStreamReader(inputStream));
             String message = br.readLine();
-            System.out.println("Receive message:" + message + " from ip: " + ip);
+            System.out.println("Receive message:" + message);
 
             message = message.split(" ")[1];
             String key = message.substring(6, 11);
             int id = Integer.parseInt(message.substring(15));
 
-            HashMap<String, String> response = new HashMap<>();
-            response.put("message", "The key is: " + key + " and the id is: " + id);
-            response.put("code", "200");
+            String response = "";
+            response += "HTTP/1.1 200 OK\n";
+            response += "Server: Sunpache 1.0\n";
+            response += "Content-Type: text\\html\n";
+            response += "Last-Modified: Mon, 11 Jan 1998 13:23:42 GMT\n";
+            response += "Accpet-ranges: bytes";
+            response += "\n";
+            response += "The key is: " + key + " and the id is: " + id;
 
-
-            System.out.println(response.toString());
+            System.out.println(response);
 
             // response an "OK" message to the client
             OutputStream outputStream = socket.getOutputStream();
             BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(outputStream));
-            bw.write(response.toString());
+            bw.write(response);
             bw.flush();
 
             inputStream.close();
