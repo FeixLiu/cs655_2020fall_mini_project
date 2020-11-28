@@ -21,16 +21,18 @@ public class ServerThread implements Runnable{
             String key = message.substring(6, 11);
             int id = Integer.parseInt(message.substring(15));
 
-            System.out.println("The key is: " + key + " and the id is: " + id);
+            String response = "The key is: " + key + " and the id is: " + id;
+
+            System.out.println(response);
 
             // response an "OK" message to the client
-//            OutputStream outputStream = socket.getOutputStream();
-//            BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(outputStream));
-//            bw.write(message);
-//            bw.flush();
+            OutputStream outputStream = socket.getOutputStream();
+            BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(outputStream));
+            bw.write(response);
+            bw.flush();
 
             inputStream.close();
-//            outputStream.close();
+            outputStream.close();
         } catch (Exception e) {
             e.printStackTrace();
         } finally {
