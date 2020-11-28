@@ -29,7 +29,7 @@ public class ServerThread implements Runnable{
             response += "Content-Type: text\\html\n";
             response += "Last-Modified: Mon, 11 Jan 1998 13:23:42 GMT\n";
             response += "Accpet-ranges: bytes";
-            response += "\n";
+            response += "\n\n";
             response += "The key is: " + key + " and the id is: " + id;
 
             System.out.println(response);
