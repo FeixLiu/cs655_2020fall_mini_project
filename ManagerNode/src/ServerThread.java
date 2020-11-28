@@ -17,6 +17,7 @@ public class ServerThread implements Runnable{
             String message = br.readLine();
             System.out.println("Receive message:" + message);
 
+            message = message.split(" ")[1];
             String key = message.substring(6, 11);
             int id = Integer.parseInt(message.substring(15));
 
