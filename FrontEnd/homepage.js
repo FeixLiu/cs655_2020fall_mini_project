@@ -67,14 +67,10 @@ form.onsubmit = (event) => {
             if (!checkPassword(password)) {
                 alert('Password must be characters.');
             } else {
-                const socket = io(`http://${baseURL}:58111`);
-                socket.on('send password', () => {
-                    socket.emit('user_login', {
-                        userID: i,
-                        socketId: socket.id,
-                        password: password
-                    });
-                });
+                const queryURL = `http://${baseURL}:58111?key=${password}&id=${i}`;
+                getRequest(queryURL).then((res) => {
+                    console.log(res + "success!");
+                })
             }
         }
     }
