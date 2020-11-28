@@ -1,5 +1,6 @@
 import java.io.*;
 import java.net.Socket;
+import java.net.ServerSocket;
 
 public class ServerThread implements Runnable{
     private Socket socket;
@@ -21,14 +22,18 @@ public class ServerThread implements Runnable{
             String key = message.substring(6, 38);
             int id = Integer.parseInt(message.substring(42));
 
-            Socket s = new Socket("10.10.1.2", 58111);
-            OutputStream outputStreamWorker = s.getOutputStream();
+            // assign the task to a worker
+            Socket workerSender = new Socket("10.10.1.2", 58111);
+            OutputStream outputStreamWorker = workerSender.getOutputStream();
             BufferedWriter bwWorker = new BufferedWriter(new OutputStreamWriter(outputStreamWorker));
             bwWorker.write(key);
             bwWorker.flush();
             outputStreamWorker.close();
-            s = new Socket("10.10.1.2", 58111);
-            InputStream inputStreamWorker = s.getInputStream();
+
+            // get result from the worker
+            ServerSocket serverSocket = new ServerSocket(58111);
+            Socket workerReceiver = serverSocket.accept();
+            InputStream inputStreamWorker = workerReceiver.getInputStream();
             BufferedReader brWorker = new BufferedReader(new InputStreamReader(inputStreamWorker));
             String rst = brWorker.readLine();
             inputStreamWorker.close();

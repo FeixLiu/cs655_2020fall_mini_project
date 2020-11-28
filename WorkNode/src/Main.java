@@ -14,17 +14,20 @@ public class Main {
             BufferedReader br = new BufferedReader(new InputStreamReader(inputStream));
             String message = br.readLine();
             System.out.println("Receive message: " + message);
+
+            inputStream.close();
             String[] arr = {"aaaaa", "ZZZZZ"};
             List<String[]> list = new ArrayList<>();
             list.add(arr);
             String res = Cracker.findPassword(list, message);
             System.out.println(res);
-            OutputStream outputStream = socket.getOutputStream();
+
+            Socket rstSender = new Socket("10.10.1.1", 58111);
+            OutputStream outputStream = rstSender.getOutputStream();
             BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(outputStream));
             bw.write(res);
             bw.flush();
             outputStream.close();
-            inputStream.close();
         } catch (Exception e) {
             e.printStackTrace();
         }
