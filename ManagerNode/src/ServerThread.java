@@ -41,14 +41,14 @@ public class ServerThread implements Runnable{
             serverSocket.close();;
             System.out.println("Get result for: " + key + " is: "  + rst);
 
-            String res = "The result is: " + rst + " and the id is: " + id;
+//            String res = "The result is: " + rst + " and the id is: " + id;
             String response = "";
             response += "HTTP/1.1 200 OK\n";
             response += "Access-Control-Allow-Origin:*\n";
             response += "Content-Type: text\\plain\n";
-            response += "Content-Length: " + res.length() + '\n';
+            response += "Content-Length: " + rst.length() + '\n';
             response += "\n";
-            response += res;
+            response += rst;
 
             // response an "OK" message to the client
             OutputStream outputStream = socket.getOutputStream();

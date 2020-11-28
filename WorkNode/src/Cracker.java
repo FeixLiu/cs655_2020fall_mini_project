@@ -3,24 +3,27 @@ import java.util.List;
 public class Cracker {
 
     public static String findPassword(List<String[]> list, String target){
-        for(int i = 0; i < list.size(); i++) {
-            String[] pair = list.get(i);
-            if(pair.length != 2) return "------------";
+        int count = 0;
+        for (String[] pair : list) {
+            if (pair.length != 2) return "------------";
             String begin = pair[0];
             String end = pair[1];
             String str = begin;
             String md5Str = Utils.encryptMD5(str);
             boolean flag = true;
-            while(!md5Str.equals(target)) {
+            while (!md5Str.equals(target)) {
+                if (count % 10000 == 0)
+                    System.out.println(str);
+                count++;
                 System.out.println(str);
-                if(str.equals(end)) {
+                if (str.equals(end)) {
                     flag = false;
                     break;
                 }
                 str = Utils.findNextStr(str);
                 md5Str = Utils.encryptMD5(str);
             }
-            if(flag && str != null && !str.equals("")) return str;
+            if (flag && str != null && !str.equals("")) return str;
         }
         return "-------";
     }
