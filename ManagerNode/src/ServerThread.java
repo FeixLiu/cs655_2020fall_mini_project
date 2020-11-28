@@ -27,10 +27,9 @@ public class ServerThread implements Runnable{
             bwWorker.write(key);
             bwWorker.flush();
             outputStreamWorker.close();
-//            InputStream inputStreamWorker = s.getInputStream();
-//            BufferedReader brWorker = new BufferedReader(new InputStreamReader(inputStreamWorker));
-//            String rst = brWorker.readLine();
-            String rst = "123";
+            InputStream inputStreamWorker = s.getInputStream();
+            BufferedReader brWorker = new BufferedReader(new InputStreamReader(inputStreamWorker));
+            String rst = brWorker.readLine();
             System.out.println("Get result for: " + key + " is: "  + rst);
 
             String res = "The result is: " + rst + " and the id is: " + id;
