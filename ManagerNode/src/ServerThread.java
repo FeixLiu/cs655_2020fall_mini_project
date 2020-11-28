@@ -26,11 +26,12 @@ public class ServerThread implements Runnable{
             BufferedWriter bwWorker = new BufferedWriter(new OutputStreamWriter(outputStreamWorker));
             bwWorker.write(key);
             bwWorker.flush();
+            outputStreamWorker.close();
+            s = new Socket("10.10.1.2", 58111);
             InputStream inputStreamWorker = s.getInputStream();
             BufferedReader brWorker = new BufferedReader(new InputStreamReader(inputStreamWorker));
             String rst = brWorker.readLine();
             inputStreamWorker.close();
-            outputStreamWorker.close();
             System.out.println("Get result for: " + key + " is: "  + rst);
 
             String res = "The result is: " + rst + " and the id is: " + id;
