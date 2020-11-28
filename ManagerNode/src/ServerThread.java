@@ -21,7 +21,7 @@ public class ServerThread implements Runnable{
 
             message = message.split(" ")[1];
             String key = message.substring(6, 38);
-            int id = Integer.parseInt(message.substring(41));
+            int id = Integer.parseInt(message.substring(42));
 
             String res = "The key is: " + key + " and the id is: " + id;
 
