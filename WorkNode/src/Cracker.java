@@ -12,7 +12,7 @@ public class Cracker {
             String md5Str = Utils.encryptMD5(str);
             boolean flag = true;
             while (!md5Str.equals(target)) {
-                if (count % 10000 == 0)
+                if (count % 1000000 == 0)
                     System.out.println(str);
                 count++;
                 if (str.equals(end)) {
