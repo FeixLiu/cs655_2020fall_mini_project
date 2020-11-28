@@ -1,5 +1,8 @@
-const form = document.getElementById('user-amount-form');
-const inputField = document.getElementById('user-amount-input-field');
+const form = document.getElementById('user-amount-port-number-form');
+
+const userAmountInputField = document.getElementById('user-amount-input-field');
+const portNumInputField = document.getElementById('port-number-input-field');
+
 const baseURL = 'pcvm3-10.instageni.illinois.edu';
 
 const getRequest = (requestURl) => {
@@ -26,6 +29,12 @@ const checkPassword = (password) => {
     return reg.test(password);
 }
 
+const checkPortNumber = (portNumer) => {
+    let reg = /^[0-9]*$/;
+    return reg.test(portNumer);
+}
+
+
 form.onsubmit = (event) => {
     event.preventDefault();
 
@@ -35,13 +44,18 @@ form.onsubmit = (event) => {
         document.body.removeChild(forms[i]);
     }
     
-    const userNum = inputField.value;
+    const userNum = userAmountInputField.value;
+    
     
     // create lists
     for (let i = 0; i < userNum; i++) {
         const form = document.createElement('form');
         form.className = 'password-form';
         document.body.appendChild(form);
+
+        const userLabel = document.createElement('label');
+        userLabel.className = 'user-id-label';
+        userLabel.textContent = `User ${i}: `;
 
         const input = document.createElement('input');
         input.type = 'text';
@@ -56,8 +70,9 @@ form.onsubmit = (event) => {
 
         const result = document.createElement('label');
         result.className = 'password-crack-result';
-        result.textContent = `Result: `;
+        result.textContent = `Result: null`;
 
+        form.appendChild(userLabel);
         form.appendChild(input);
         form.appendChild(submitBtn);
         form.appendChild(result);
@@ -65,14 +80,16 @@ form.onsubmit = (event) => {
         form.onsubmit = function(e) {
             e.preventDefault();
             const password = input.value;
+            const portNum = portNumInputField.value;
 
-            if (!checkPassword(password)) {
-                alert('Password must be characters.');
+            if (!checkPassword(password) || !(checkPortNumber(portNum))) {
+                alert('Invalid value.');
             } else {
-                const queryURL = `http://${baseURL}:58888?key=${hex_md5(password)}&id=${i}`;
-                console.log(queryURL);
+                const queryURL = `http://${baseURL}:${portNum}?key=${hex_md5(password)}&id=${i}`;
+
                 getRequest(queryURL).then((res) => {
                     console.log(res);
+                    result.textContent = `Result: ${res}`;
                 })
             }   
         }

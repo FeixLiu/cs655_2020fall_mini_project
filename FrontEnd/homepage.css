@@ -1,5 +1,6 @@
-#user-amount-form {
+#user-amount-port-number-form {
     text-align: center;
+    font-size: 25px;
 }
 
 #user-amount-input-field {
@@ -8,22 +9,31 @@
     line-height: 2;
     border: darkgray 1px solid;
     outline: none;
-    margin: 0 auto;
-    font-size: 25px;
     margin-top: 40px;
+    font-size: 20px;
 }
 
-#user-amount-submit-button {
+#port-number-input-field {
+    border-radius: 30px;
+    text-align: center;
+    line-height: 2;
+    border: darkgray 1px solid;
+    outline: none;
+    margin-top: 40px;
+    font-size: 20px;
+}
+
+#user-amount-port-number-submit-button {
     height: 50px;
     border-radius: 25px;
     color:white;
     outline: none;
     border: none;
     background: rgb(177, 0, 0);
-    font-size: 20px;
     cursor: pointer;
     width: 100px;
-    margin-left: 20px;
+    margin-top: 50px;
+    font-size: 20px;
 }
 
 .password-input-field {
@@ -47,6 +57,7 @@
     cursor: pointer;
     width: 80px;
     margin-left: 10px;
+    
 }
 
 #project-title {
