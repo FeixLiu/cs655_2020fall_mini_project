@@ -1,5 +1,6 @@
 import java.io.*;
 import java.net.Socket;
+import java.util.HashMap;
 
 public class ServerThread implements Runnable{
     private Socket socket;
@@ -13,22 +14,26 @@ public class ServerThread implements Runnable{
         try {
             // read the message sent from the client
             InputStream inputStream = socket.getInputStream();
+            String ip = socket.getRemoteSocketAddress().toString();
             BufferedReader br = new BufferedReader(new InputStreamReader(inputStream));
             String message = br.readLine();
-            System.out.println("Receive message:" + message);
+            System.out.println("Receive message:" + message + " from ip: " + ip);
 
             message = message.split(" ")[1];
             String key = message.substring(6, 11);
             int id = Integer.parseInt(message.substring(15));
 
-            String response = "The key is: " + key + " and the id is: " + id;
+            HashMap<String, String> response = new HashMap<>();
+            response.put("message", "The key is: " + key + " and the id is: " + id);
+            response.put("code", "200");
 
-            System.out.println(response);
+
+            System.out.println(response.toString());
 
             // response an "OK" message to the client
             OutputStream outputStream = socket.getOutputStream();
             BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(outputStream));
-            bw.write(response);
+            bw.write(response.toString());
             bw.flush();
 
             inputStream.close();
