@@ -15,7 +15,6 @@ public class Cracker {
                 if (count % 10000 == 0)
                     System.out.println(str);
                 count++;
-                System.out.println(str);
                 if (str.equals(end)) {
                     flag = false;
                     break;
