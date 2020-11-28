@@ -69,7 +69,8 @@ form.onsubmit = (event) => {
             if (!checkPassword(password)) {
                 alert('Password must be characters.');
             } else {
-                const queryURL = `http://${baseURL}:58888?key=${password}&id=${i}`;
+                const queryURL = `http://${baseURL}:58888?key=${hex_md5(password)}&id=${i}`;
+                console.log(queryURL);
                 getRequest(queryURL).then((res) => {
                     console.log(res);
                 })
