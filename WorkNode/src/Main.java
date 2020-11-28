@@ -9,7 +9,7 @@ public class Main {
     public static void main(String[] args){
 
         ServerSocket serverSocket = new ServerSocket(58111);
-        Socket client = serverSocket.accept();
+        Socket socket = serverSocket.accept();
         InputStream inputStream = socket.getInputStream();
         BufferedReader br = new BufferedReader(new InputStreamReader(inputStream));
         String message = br.readLine();
