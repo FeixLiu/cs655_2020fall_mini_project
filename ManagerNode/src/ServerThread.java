@@ -4,7 +4,7 @@ import java.net.ServerSocket;
 
 public class ServerThread implements Runnable{
     private Socket socket;
-    public ServerThread(Socket client) {
+    public ServerThread(Socket client, WorkerInfo worker, int id) {
         this.socket = client;
         new Thread(this).start();
     }
