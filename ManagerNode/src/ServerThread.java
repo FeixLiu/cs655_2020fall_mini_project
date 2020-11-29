@@ -77,15 +77,6 @@ public class ServerThread implements Runnable{
             return rst;
         } catch (Exception e) {
             e.printStackTrace();
-        } finally {
-            if (socket != null) {
-                try {
-                    socket.close();
-                } catch (Exception e) {
-                    socket = null;
-                    e.printStackTrace();
-                }
-            }
         }
         return "";
     }
