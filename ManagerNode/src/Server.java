@@ -11,6 +11,9 @@ public class Server {
     public Queue<Socket> clientQueue = new LinkedList<>();
 
     public Server(int port) {
+        for(int i = 0; i < avail.length; i++) {
+            avail[i] = true;
+        }
         this.port = port;
     }
     public void init() {
@@ -23,7 +26,12 @@ public class Server {
                 int availIndex = getAvail();
                 if(availIndex != -1) {
                     avail[availIndex] = false;
-                    new ServerThread(client, Config.workerMap.get(availIndex), availIndex);
+                    if(!clientQueue.isEmpty()) {
+                        new ServerThread(clientQueue.poll(), Config.workerMap.get(availIndex), availIndex);
+                    }
+                }
+                else{
+                    System.out.println("No worker available now.");
                 }
             }
         } catch (Exception e) {
