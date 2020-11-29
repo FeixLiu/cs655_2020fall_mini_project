@@ -7,10 +7,11 @@ import java.util.Queue;
 
 public class Server {
     public int port;
-    public static boolean[] avail = new boolean[Config.NUM_OF_WORKER];
+    public static boolean[] avail;
     public Queue<Socket> clientQueue = new LinkedList<>();
 
     public Server(int port) {
+        avail = new boolean[Config.NUM_OF_WORKER];
         for(int i = 0; i < avail.length; i++) {
             avail[i] = true;
         }
