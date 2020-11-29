@@ -3,7 +3,6 @@ import java.net.Socket;
 
 public class Server {
     public int port;
-    public static boolean available = true;
     public Server(int port) {
         this.port = port;
     }
@@ -13,9 +12,6 @@ public class Server {
             ServerSocket serverSocket = new ServerSocket(port);
             while (true) {
                 Socket client = serverSocket.accept(); // connect successfully
-                System.out.println("Server's: " + available);
-                available = false;
-                System.out.println("Server's: " + available);
                 new ServerThread(client);
             }
         } catch (Exception e) {
