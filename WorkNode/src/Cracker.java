@@ -13,7 +13,7 @@ public class Cracker {
             boolean flag = true;
             while (!md5Str.equals(target)) {
                 if (count % 1000000 == 0)
-                    System.out.println(str);
+                    System.out.println("Handling request: " + target + ". Has processed to: " + str);
                 count++;
                 if (str.equals(end)) {
                     flag = false;
