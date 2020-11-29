@@ -16,11 +16,11 @@ public class ServerThread implements Runnable{
             InputStream inputStream = socket.getInputStream();
             BufferedReader br = new BufferedReader(new InputStreamReader(inputStream));
             String message = br.readLine();
-            System.out.println("Receive message: " + message);
 
             message = message.split(" ")[1];
             String key = message.substring(6, 38);
             int id = Integer.parseInt(message.substring(42));
+            System.out.println("Received a request: " + key);
 
             String rst = getResult(key, "10.10.1.2", "10.10.1.1");
 
@@ -60,7 +60,7 @@ public class ServerThread implements Runnable{
             Socket workerSender = new Socket(targetIp, 58111);
             OutputStream outputStreamWorker = workerSender.getOutputStream();
             BufferedWriter bwWorker = new BufferedWriter(new OutputStreamWriter(outputStreamWorker));
-            System.out.println("Sending the request to worker: " + targetIp);
+            System.out.println("Sending the request to the worker: " + targetIp);
             bwWorker.write("key:" + key + ",ip:" + selfIp + ",port:" + 58112);
             bwWorker.flush();
             outputStreamWorker.close();
@@ -74,6 +74,7 @@ public class ServerThread implements Runnable{
             String rst = brWorker.readLine();
             inputStreamWorker.close();
             serverSocket.close();
+            System.out.println("Get result from the worker" + targetIp);
             System.out.println("Get result for: " + key + " is: " + rst);
             return rst;
         } catch (Exception e) {
