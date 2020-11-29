@@ -19,9 +19,12 @@ public class Server {
     public void init() {
         try {
             System.out.println("Server started!");
+            System.out.println(port);
             ServerSocket serverSocket = new ServerSocket(port);
             while (true) {
+                System.out.println("begin");
                 Socket client = serverSocket.accept(); // connect successfully
+                System.out.println("successfully connected");
                 clientQueue.add(client);
                 System.out.println("size: " + clientQueue.size());
                 int availIndex = getAvail();
