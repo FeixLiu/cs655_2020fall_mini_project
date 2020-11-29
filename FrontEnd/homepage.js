@@ -20,6 +20,7 @@ const getRequest = (requestURl) => {
         })
         .catch(err => {
             reject(err);
+            alert('Connection Error: the port number is incorrect!');
         });
     })
 }
@@ -70,7 +71,6 @@ form.onsubmit = (event) => {
 
         const result = document.createElement('label');
         result.className = 'password-crack-result';
-        result.textContent = `Result: null`;
 
         form.appendChild(userLabel);
         form.appendChild(input);
@@ -79,6 +79,7 @@ form.onsubmit = (event) => {
 
         form.onsubmit = function(e) {
             e.preventDefault();
+            result.textContent = 'Pending';
             const password = input.value;
             const portNum = portNumInputField.value;
 
@@ -87,10 +88,15 @@ form.onsubmit = (event) => {
             } else {
                 const queryURL = `http://${baseURL}:${portNum}?key=${hex_md5(password)}&id=${i}`;
 
+                let begin = new Date();
                 getRequest(queryURL).then((res) => {
                     console.log(res);
-                    result.textContent = `Result: ${res}`;
+                    let end = new Date();
+                    result.textContent = `Result: ${res} runtime: ${end-begin}ms`;
+                    
+                    
                 })
+                
             }   
         }
     }
