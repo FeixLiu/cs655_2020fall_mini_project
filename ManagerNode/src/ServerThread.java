@@ -40,6 +40,9 @@ public class ServerThread implements Runnable{
 
             inputStream.close();
             outputStream.close();
+            System.out.println("ST's: " + Server.available);
+            Server.available = true;
+            System.out.println("ST's: " + Server.available);
         } catch (Exception e) {
             e.printStackTrace();
         } finally {
