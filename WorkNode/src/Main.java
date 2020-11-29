@@ -25,7 +25,7 @@ public class Main {
                 List<String[]> list = new ArrayList<>();
                 list.add(arr);
                 String res = Cracker.findPassword(list, key);
-                System.out.println(res);
+                System.out.println("The result for the request: " + key + " is: " + res);
 
                 Socket rstSender = new Socket(ip, port);
                 OutputStream outputStream = rstSender.getOutputStream();

@@ -60,7 +60,7 @@ public class ServerThread implements Runnable{
             Socket workerSender = new Socket(targetIp, 58111);
             OutputStream outputStreamWorker = workerSender.getOutputStream();
             BufferedWriter bwWorker = new BufferedWriter(new OutputStreamWriter(outputStreamWorker));
-            System.out.println("Sending the request to worker.");
+            System.out.println("Sending the request to worker: " + targetIp);
             bwWorker.write("key:" + key + ",ip:" + selfIp + ",port:" + 58112);
             bwWorker.flush();
             outputStreamWorker.close();
