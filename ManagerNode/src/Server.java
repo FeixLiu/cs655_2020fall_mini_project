@@ -23,10 +23,13 @@ public class Server {
             while (true) {
                 Socket client = serverSocket.accept(); // connect successfully
                 clientQueue.add(client);
+                System.out.println("size: " + clientQueue.size());
                 int availIndex = getAvail();
+                System.out.println("index: " + availIndex);
                 if(availIndex != -1) {
                     avail[availIndex] = false;
                     if(!clientQueue.isEmpty()) {
+                        System.out.println("start a server thread");
                         new ServerThread(clientQueue.poll(), Config.workerMap.get(availIndex), availIndex);
                     }
                 }
