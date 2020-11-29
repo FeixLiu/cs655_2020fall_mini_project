@@ -7,9 +7,19 @@ import java.net.Socket;
 public class Main {
 
     public static void main(String[] args){
+        if (args.length == 0) {
+            System.out.println("Missing required params.");
+            return;
+        }
+
+        int portNumber = Integer.parseInt(args[0]);
+        if (portNumber < 58000 || portNumber > 58999) {
+            System.out.println("Port number is invalid.");
+            return;
+        }
         while (true) {
             try {
-                ServerSocket serverSocket = new ServerSocket(58111);
+                ServerSocket serverSocket = new ServerSocket(portNumber);
                 Socket socket = serverSocket.accept();
                 InputStream inputStream = socket.getInputStream();
                 BufferedReader br = new BufferedReader(new InputStreamReader(inputStream));
