@@ -22,7 +22,7 @@ public class ServerThread implements Runnable{
             String key = message.substring(6, 38);
             int id = Integer.parseInt(message.substring(42));
 
-            String rst = getResult(key);
+            String rst = getResult(key, "10.10.1.2", "10.10.1.1");
 
             String response = "";
             response += "HTTP/1.1 200 OK\n";
@@ -54,19 +54,20 @@ public class ServerThread implements Runnable{
         }
     }
 
-    public String getResult(String key) {
+    public String getResult(String key, String targetIp, String selfIp) {
         try {
             // assign the task to a worker
-            Socket workerSender = new Socket("10.10.1.2", 58111);
+            Socket workerSender = new Socket(targetIp, 58111);
             OutputStream outputStreamWorker = workerSender.getOutputStream();
             BufferedWriter bwWorker = new BufferedWriter(new OutputStreamWriter(outputStreamWorker));
-            bwWorker.write(key);
+            System.out.println("Sending the request to worker: " + targetIp);
+            bwWorker.write("key:" + key + ",ip:" + selfIp + ",port:" + 58112);
             bwWorker.flush();
             outputStreamWorker.close();
             workerSender.close();
 
             // get result from the worker
-            ServerSocket serverSocket = new ServerSocket(58111);
+            ServerSocket serverSocket = new ServerSocket(58112);
             Socket workerReceiver = serverSocket.accept();
             InputStream inputStreamWorker = workerReceiver.getInputStream();
             BufferedReader brWorker = new BufferedReader(new InputStreamReader(inputStreamWorker));
