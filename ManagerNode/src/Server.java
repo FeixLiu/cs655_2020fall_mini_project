@@ -48,6 +48,7 @@ public class Server {
 //  if has avail, return avail index, otherwise, return -1.
     public static int getAvail(){
         for(int i = 0; i < avail.length; i++) {
+            System.out.println(i + " " + avail[i]);
             if(avail[i]) return i;
         }
         return -1;
