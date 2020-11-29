@@ -4,8 +4,12 @@ import java.net.ServerSocket;
 
 public class ServerThread implements Runnable{
     private Socket socket;
+    private WorkerInfo worker;
+    private int id;
     public ServerThread(Socket client, WorkerInfo worker, int id) {
         this.socket = client;
+        this.worker = worker;
+        this.id = id;
         new Thread(this).start();
     }
 
@@ -19,10 +23,10 @@ public class ServerThread implements Runnable{
 
             message = message.split(" ")[1];
             String key = message.substring(6, 38);
-            int id = Integer.parseInt(message.substring(42));
+            int userId = Integer.parseInt(message.substring(42));
             System.out.println("Received a request: " + key);
 
-            String rst = getResult(key, "10.10.1.2", "10.10.1.1");
+            String rst = getResult(key, worker.workerIp, worker.managerIp, worker.port);
 
             String response = "";
             response += "HTTP/1.1 200 OK\n";
@@ -40,6 +44,7 @@ public class ServerThread implements Runnable{
 
             inputStream.close();
             outputStream.close();
+            Server.avail[this.id] = true;
         } catch (Exception e) {
             e.printStackTrace();
         } finally {
@@ -54,20 +59,30 @@ public class ServerThread implements Runnable{
         }
     }
 
-    public String getResult(String key, String targetIp, String selfIp) {
+    public String getResult(String key, String targetIp, String selfIp, int port) {
         try {
             // assign the task to a worker
-            Socket workerSender = new Socket(targetIp, 58111);
+            ServerSocket serverSocket;
+            int rstPort = 58000;
+            while (true) {
+                // find an appropriate port to receive the number
+                try {
+                    serverSocket = new ServerSocket(rstPort);
+                    break;
+                } catch (Exception e) {
+                    rstPort++;
+                }
+            }
+            Socket workerSender = new Socket(targetIp, port);
             OutputStream outputStreamWorker = workerSender.getOutputStream();
             BufferedWriter bwWorker = new BufferedWriter(new OutputStreamWriter(outputStreamWorker));
             System.out.println("Sending the request to the worker: " + targetIp);
-            bwWorker.write("key:" + key + ",ip:" + selfIp + ",port:" + 58112);
+            bwWorker.write("key:" + key + ",ip:" + selfIp + ",port:" + rstPort);
             bwWorker.flush();
             outputStreamWorker.close();
             workerSender.close();
 
             // get result from the worker
-            ServerSocket serverSocket = new ServerSocket(58112);
             Socket workerReceiver = serverSocket.accept();
             InputStream inputStreamWorker = workerReceiver.getInputStream();
             BufferedReader brWorker = new BufferedReader(new InputStreamReader(inputStreamWorker));

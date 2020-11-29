@@ -1,4 +1,5 @@
 public class WorkerInfo {
-    public String ip;
+    public String workerIp;
+    public String managerIp;
     public int port;
 }

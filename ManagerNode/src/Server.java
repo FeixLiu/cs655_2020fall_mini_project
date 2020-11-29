@@ -3,6 +3,7 @@ import java.net.Socket;
 
 public class Server {
     public int port;
+    public static boolean[] avail = new boolean[4];
     public Server(int port) {
         this.port = port;
     }
