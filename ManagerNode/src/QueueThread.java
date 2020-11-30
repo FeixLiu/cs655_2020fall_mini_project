@@ -10,17 +10,12 @@ public class QueueThread implements Runnable{
         try {
             while(true) {
                 if (Server.clientQueue.isEmpty()) continue;
-                boolean flag = false;
                 for (int i = 0; i < Server.avail.length; i++) {
                     if (Server.avail[i].compareAndSet(true, false)) {
-                        flag = true;
                         System.out.println("Worker " + i + " is available.");
                         new ServerThread(Server.clientQueue.poll(), Config.workerMap.get(i), i);
                         break;
                     }
-                }
-                if(!flag) {
-                    System.out.println("No worker available now, wait......");
                 }
             }
         } catch (Exception e) {
