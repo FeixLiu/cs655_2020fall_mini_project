@@ -92,9 +92,7 @@ form.onsubmit = (event) => {
                 getRequest(queryURL).then((res) => {
                     console.log(res);
                     let end = new Date();
-                    result.textContent = `Result: ${res} runtime: ${end-begin}ms`;
-                    
-                    
+                    result.textContent = `Result: ${res}, Runtime: ${(end-begin) / 1000} ms`;
                 })
                 
             }   
