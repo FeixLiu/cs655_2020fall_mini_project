@@ -45,7 +45,7 @@ public class ServerThread implements Runnable{
 
             inputStream.close();
             outputStream.close();
-            System.out.println("Set avail id " + this.id + " to true");
+//            System.out.println("Set avail id " + this.id + " to true");
             Server.avail[this.id].set(true);
         } catch (Exception e) {
             e.printStackTrace();
