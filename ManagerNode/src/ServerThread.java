@@ -1,6 +1,7 @@
 import java.io.*;
 import java.net.Socket;
 import java.net.ServerSocket;
+import java.util.concurrent.atomic.AtomicBoolean;
 
 public class ServerThread implements Runnable{
     private Socket socket;
@@ -44,7 +45,7 @@ public class ServerThread implements Runnable{
 
             inputStream.close();
             outputStream.close();
-            Server.avail[this.id] = true;
+            Server.avail[this.id].set(true);
         } catch (Exception e) {
             e.printStackTrace();
         } finally {

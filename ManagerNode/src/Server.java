@@ -4,16 +4,19 @@ import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.Map;
 import java.util.Queue;
+import java.util.concurrent.BlockingQueue;
+import java.util.concurrent.LinkedBlockingQueue;
+import java.util.concurrent.atomic.AtomicBoolean;
 
 public class Server {
     public int port;
-    public static boolean[] avail;
-    public Queue<Socket> clientQueue = new LinkedList<>();
+    public static AtomicBoolean[] avail;
+    public static BlockingQueue<Socket> clientQueue = new LinkedBlockingQueue<>();
 
     public Server(int port) {
-        avail = new boolean[Config.NUM_OF_WORKER];
+        avail = new AtomicBoolean[Config.NUM_OF_WORKER];
         for(int i = 0; i < avail.length; i++) {
-            avail[i] = true;
+            avail[i].set(true);
         }
         this.port = port;
     }
@@ -22,32 +25,17 @@ public class Server {
             System.out.println("Server started!");
             System.out.println(port);
             ServerSocket serverSocket = new ServerSocket(port);
+            new QueueThread();
             while (true) {
                 Socket client = serverSocket.accept(); // connect successfully
                 clientQueue.add(client);
-                int availIndex = getAvail();
-                if(availIndex != -1) {
-                    avail[availIndex] = false;
-                    if(!clientQueue.isEmpty()) {
-                        new ServerThread(clientQueue.poll(), Config.workerMap.get(availIndex), availIndex);
-                    }
-                }
-                else{
-                    System.out.println("No worker available now. Wait......");
-                }
             }
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
 
-//  if has avail, return avail index, otherwise, return -1.
-    public static int getAvail(){
-        for(int i = 0; i < avail.length; i++) {
-            if(avail[i]) return i;
-        }
-        return -1;
-    }
+
 
     public static void main(String[] args) {
         if (args.length == 0) {
