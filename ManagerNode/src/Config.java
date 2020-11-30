@@ -1,6 +1,4 @@
-import java.io.BufferedReader;
 import java.io.FileInputStream;
-import java.io.FileReader;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
@@ -24,14 +22,14 @@ public class Config {
                 String[] arr = line.split(" ");
                 String managerIP = arr[0];
                 String workerIP = arr[1];
-                int port = Integer.valueOf(arr[2]);
+                int port = Integer.parseInt(arr[2]);
                 WorkerInfo worker = new WorkerInfo(id, managerIP, workerIP, port);
                 workerMap.put(id, worker);
                 id++;
             }
             sc.close();
             System.out.println(workerMap.toString());
-        } catch (IOException e) {
+        } catch (IOException ignored) {
         }
     }
 }

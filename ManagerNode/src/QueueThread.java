@@ -1,6 +1,4 @@
-
 public class QueueThread implements Runnable{
-
     public QueueThread() {
         new Thread(this).start();
     }
