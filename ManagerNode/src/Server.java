@@ -23,22 +23,17 @@ public class Server {
             System.out.println(port);
             ServerSocket serverSocket = new ServerSocket(port);
             while (true) {
-                System.out.println("begin");
                 Socket client = serverSocket.accept(); // connect successfully
-                System.out.println("successfully connected");
                 clientQueue.add(client);
-                System.out.println("size: " + clientQueue.size());
                 int availIndex = getAvail();
-                System.out.println("index: " + availIndex);
                 if(availIndex != -1) {
                     avail[availIndex] = false;
                     if(!clientQueue.isEmpty()) {
-                        System.out.println("start a server thread");
                         new ServerThread(clientQueue.poll(), Config.workerMap.get(availIndex), availIndex);
                     }
                 }
                 else{
-                    System.out.println("No worker available now.");
+                    System.out.println("No worker available now. Wait......");
                 }
             }
         } catch (Exception e) {
@@ -49,7 +44,6 @@ public class Server {
 //  if has avail, return avail index, otherwise, return -1.
     public static int getAvail(){
         for(int i = 0; i < avail.length; i++) {
-            System.out.println(i + " " + avail[i]);
             if(avail[i]) return i;
         }
         return -1;
