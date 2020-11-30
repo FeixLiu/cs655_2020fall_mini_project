@@ -16,6 +16,7 @@ public class QueueThread implements Runnable{
                         flag = true;
                         System.out.println("Worker " + i + " is available.");
                         new ServerThread(Server.clientQueue.poll(), Config.workerMap.get(i), i);
+                        break;
                     }
                 }
                 if(!flag) {
