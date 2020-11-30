@@ -1,7 +1,6 @@
 import java.io.*;
 import java.net.Socket;
 import java.net.ServerSocket;
-import java.util.concurrent.atomic.AtomicBoolean;
 
 public class ServerThread implements Runnable{
     private Socket socket;

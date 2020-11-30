@@ -1,9 +1,5 @@
 import java.net.ServerSocket;
 import java.net.Socket;
-import java.util.HashMap;
-import java.util.LinkedList;
-import java.util.Map;
-import java.util.Queue;
 import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.LinkedBlockingQueue;
 import java.util.concurrent.atomic.AtomicBoolean;
@@ -20,10 +16,10 @@ public class Server {
         }
         this.port = port;
     }
+
     public void init() {
         try {
-            System.out.println("Server started!");
-            System.out.println(port);
+            System.out.println("Server started on port: " + port);
             ServerSocket serverSocket = new ServerSocket(port);
             new QueueThread();
             while (true) {

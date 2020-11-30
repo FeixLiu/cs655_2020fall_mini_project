@@ -11,12 +11,12 @@ public class Main {
             System.out.println("Missing required params.");
             return;
         }
-
         int portNumber = Integer.parseInt(args[0]);
         if (portNumber < 58000 || portNumber > 58999) {
             System.out.println("Port number is invalid.");
             return;
         }
+
         while (true) {
             try {
                 ServerSocket serverSocket = new ServerSocket(portNumber);

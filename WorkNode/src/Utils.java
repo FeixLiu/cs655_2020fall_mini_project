@@ -3,15 +3,15 @@ import java.security.MessageDigest;
 
 public class Utils {
     public static void printArr(int[] arr){
-        for(int i= 0; i < arr.length; i++) {
-            System.out.print(arr[i] + " ");
+        for (int value : arr) {
+            System.out.print(value + " ");
         }
         System.out.println();
     }
 
     public static String findNextStr(String str){
-        String result = "";
-        if(str.matches("[Z]+")) return result;
+        StringBuilder result = new StringBuilder();
+        if(str.matches("[Z]+")) return result.toString();
         int[] arr = new int[str.length()];
         for(int i = 0; i < str.length(); i++) {
             arr[i] = getNumByCharacter(str.charAt(i));
@@ -28,10 +28,10 @@ public class Utils {
                 break;
             }
         }
-        for(int i = 0; i < arr.length; i++) {
-            result += getCharacterByNum(arr[i]);
+        for (int value : arr) {
+            result.append(getCharacterByNum(value));
         }
-        return result;
+        return result.toString();
     }
 
     public static int getNumByCharacter(char c){

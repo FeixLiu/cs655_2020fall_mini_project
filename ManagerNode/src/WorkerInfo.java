@@ -4,10 +4,6 @@ public class WorkerInfo {
     public int port;
     public int id;
 
-    public WorkerInfo(){
-
-    }
-
     public WorkerInfo(int id, String managerIp, String workerIp, int port) {
         this.workerIp = workerIp;
         this.managerIp = managerIp;
@@ -17,7 +13,6 @@ public class WorkerInfo {
 
     @Override
     public String toString() {
-        String str = "ID: " + id + ", manager IP: " + managerIp +  ", worker IP: " + workerIp + ", Port: " + port;
-        return str;
+        return "ID: " + id + ", manager IP: " + managerIp +  ", worker IP: " + workerIp + ", Port: " + port;
     }
 }
