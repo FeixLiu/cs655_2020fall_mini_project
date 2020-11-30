@@ -16,7 +16,7 @@ public class Server {
     public Server(int port) {
         avail = new AtomicBoolean[Config.NUM_OF_WORKER];
         for(int i = 0; i < avail.length; i++) {
-            avail[i].set(true);
+            avail[i] = new AtomicBoolean(true);
         }
         this.port = port;
     }
