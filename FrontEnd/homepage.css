@@ -7,6 +7,15 @@
     margin: 30px;
 }
 
+#title {
+    font-size: 50px;
+    margin-left: 30px;
+}
+
+#sub-title {
+    margin-left: 30px;
+}
+
 #port-number-input-field {
     border-radius: 30px;
     text-align: center;

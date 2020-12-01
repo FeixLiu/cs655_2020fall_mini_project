@@ -71,7 +71,7 @@ function createUserForm(userID) {
   var submitBtn = document.createElement('button');
   submitBtn.className = 'submit-button';
   submitBtn.type = 'submit';
-  submitBtn.textContent = 'submit';
+  submitBtn.textContent = 'Submit';
   var result = document.createElement('label');
   result.id = "password-crack-result-".concat(userID);
   result.className = 'password-crack-result';
