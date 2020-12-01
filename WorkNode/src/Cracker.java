@@ -6,9 +6,6 @@ public class Cracker {
         int count = 0;
         for (String[] pair : list) {
             if (pair.length != 2) return "------------";
-            String emptyMD5 = Utils.encryptMD5("");
-            if (emptyMD5.equals(target))
-                return "";
             String begin = pair[0];
             String end = pair[1];
             String str = begin;
