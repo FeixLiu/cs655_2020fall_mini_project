@@ -3,3 +3,5 @@
 */.idea/*
 *.class
 */out
+.vscode/*
+*/.vscode/*
