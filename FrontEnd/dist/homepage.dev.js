@@ -9,7 +9,7 @@ var portNum;
 
 function checkPassword(password) {
   var reg = /^[a-zA-Z]*$/;
-  return reg.test(password);
+  return reg.test(password) && password !== '';
 }
 
 function checkPortNumber(portNumer) {
@@ -29,7 +29,7 @@ function getRequest(requestURl) {
       resolve(body);
     })["catch"](function (err) {
       reject(err);
-      alert('Connection Refused');
+      alert('Connection refused, please change a port number.');
     });
   });
 }

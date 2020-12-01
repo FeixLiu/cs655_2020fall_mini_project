@@ -8,7 +8,7 @@ let portNum;
 
 function checkPassword(password) {
     let reg = /^[a-zA-Z]*$/;
-    return reg.test(password);
+    return reg.test(password) && (password !== '');
 }
 
 function checkPortNumber(portNumer) {
@@ -31,7 +31,7 @@ function getRequest(requestURl) {
         })
         .catch(err => {
             reject(err);
-            alert('Connection Refused');
+            alert('Connection refused, please change a port number.');
         });
     })
 }
