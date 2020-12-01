@@ -3,7 +3,9 @@
     font-size: 25px;
     display: flex;
     align-items: center;
-    margin: 30px;
+    position: relative;
+    margin-top: 50px;
+    left: 30%;
 }
 
 #port-number-input-field {
@@ -62,7 +64,7 @@
     font-size: 15px;
     cursor: pointer;
     width: 80px;
-    margin-left: 10px;
+    margin-left: 20px;
 }
 
 .remove-button {
@@ -85,9 +87,10 @@
 }
 
 .password-form {
-    margin-top: 20px;
-    margin-left: 50px;
+    position: relative;
+    left: 35%;
     font-size: 20px;
+    margin-top: 20px;
 }
 
 .password-crack-result {
