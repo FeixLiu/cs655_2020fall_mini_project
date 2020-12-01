@@ -48,7 +48,7 @@ function submitPassword(password, portNum, userID, resultEle) {
         getRequest(queryURL).then((res) => {
             console.log(res);
             let endTime = new Date();
-            resultEle.textContent = `Result: ${res}, Runtime: ${(endTime-startTime) / 1000} ms`;
+            resultEle.textContent = `Result: ${res}. Runtime: ${(endTime-startTime) / 1000} s`;
         })
     }   
 }

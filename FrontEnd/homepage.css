@@ -3,6 +3,7 @@
     font-size: 25px;
     display: flex;
     align-items: center;
+    position: relative;
     margin: 30px;
 }
 
@@ -62,7 +63,7 @@
     font-size: 15px;
     cursor: pointer;
     width: 80px;
-    margin-left: 10px;
+    margin-left: 20px;
 }
 
 .remove-button {
@@ -85,9 +86,9 @@
 }
 
 .password-form {
-    margin-top: 20px;
-    margin-left: 50px;
     font-size: 20px;
+    margin-left: 50px;
+    margin-top: 20px;
 }
 
 .password-crack-result {
