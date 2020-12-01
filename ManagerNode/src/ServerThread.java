@@ -90,7 +90,7 @@ public class ServerThread implements Runnable{
             String rst = brWorker.readLine();
             inputStreamWorker.close();
             serverSocket.close();
-            System.out.println("Get result from the worker" + targetIp);
+            System.out.println("Get result from the worker: " + targetIp);
             System.out.println("Get result for: " + key + " is: " + rst);
             return rst;
         } catch (Exception e) {
