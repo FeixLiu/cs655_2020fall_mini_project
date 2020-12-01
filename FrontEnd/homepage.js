@@ -36,7 +36,7 @@ function getRequest(requestURl) {
     })
 }
 
-function submitPassword(password, portNum, userID, resultEle) {
+function submitPassword(password, portNum, userID, resultEle, inputEle) {
     if (!checkPassword(password) || !(checkPortNumber(portNum))) {
         alert('Invalid value.');
     } else {
@@ -45,10 +45,12 @@ function submitPassword(password, portNum, userID, resultEle) {
         const queryURL = `http://${BASE_URL}:${portNum}?key=${md5Password}&id=${userID}`;
         let startTime = new Date();
         resultEle.textContent = 'Pending';
+        inputEle.disabled = true;
         getRequest(queryURL).then((res) => {
             console.log(res);
             let endTime = new Date();
             resultEle.textContent = `Result: ${res}. Runtime: ${(endTime-startTime) / 1000} s`;
+            inputEle.disabled = false;
         })
     }   
 }
@@ -104,7 +106,7 @@ function createUserForm(userID) {
     form.onsubmit = function(e) {
         e.preventDefault();
         const password = input.value;
-        submitPassword(password, portNum, userID, result);
+        submitPassword(password, portNum, userID, result, input);
     }
 
     return form;
@@ -125,14 +127,19 @@ portNumForm.onsubmit = (event) => {
         document.body.removeChild(forms[i]);
     }
     portNum = portNumInputField.value;
+    if (portNum === '') {
+        alert('Please input a port number.');
+    } else {
+        const md5Password = hex_md5("aaaaa");
+        const queryURL = `http://${BASE_URL}:${portNum}?key=${md5Password}&id=${-1}`;
+        getRequest(queryURL).then(() =>{
+            addUserBtn.style.visibility = "visible";
+        }).catch(() => {
+            addUserBtn.style.visibility = "hidden";
+        })
+    }
 
-    const md5Password = hex_md5("aaaaa");
-    const queryURL = `http://${BASE_URL}:${portNum}?key=${md5Password}&id=${-1}`;
-    getRequest(queryURL).then(() =>{
-        addUserBtn.style.visibility = "visible";
-    }).catch(() => {
-        addUserBtn.style.visibility = "hidden";
-    })
+    
 }
     
 

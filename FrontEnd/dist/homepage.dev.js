@@ -34,7 +34,7 @@ function getRequest(requestURl) {
   });
 }
 
-function submitPassword(password, portNum, userID, resultEle) {
+function submitPassword(password, portNum, userID, resultEle, inputEle) {
   if (!checkPassword(password) || !checkPortNumber(portNum)) {
     alert('Invalid value.');
   } else {
@@ -42,10 +42,12 @@ function submitPassword(password, portNum, userID, resultEle) {
     var queryURL = "http://".concat(BASE_URL, ":").concat(portNum, "?key=").concat(md5Password, "&id=").concat(userID);
     var startTime = new Date();
     resultEle.textContent = 'Pending';
+    inputEle.disabled = true;
     getRequest(queryURL).then(function (res) {
       console.log(res);
       var endTime = new Date();
       resultEle.textContent = "Result: ".concat(res, ". Runtime: ").concat((endTime - startTime) / 1000, " s");
+      inputEle.disabled = false;
     });
   }
 }
@@ -97,7 +99,7 @@ function createUserForm(userID) {
   form.onsubmit = function (e) {
     e.preventDefault();
     var password = input.value;
-    submitPassword(password, portNum, userID, result);
+    submitPassword(password, portNum, userID, result, input);
   };
 
   return form;
@@ -119,11 +121,16 @@ portNumForm.onsubmit = function (event) {
   }
 
   portNum = portNumInputField.value;
-  var md5Password = hex_md5("aaaaa");
-  var queryURL = "http://".concat(BASE_URL, ":").concat(portNum, "?key=").concat(md5Password, "&id=").concat(-1);
-  getRequest(queryURL).then(function () {
-    addUserBtn.style.visibility = "visible";
-  })["catch"](function () {
-    addUserBtn.style.visibility = "hidden";
-  });
+
+  if (portNum === '') {
+    alert('Please input a port number.');
+  } else {
+    var md5Password = hex_md5("aaaaa");
+    var queryURL = "http://".concat(BASE_URL, ":").concat(portNum, "?key=").concat(md5Password, "&id=").concat(-1);
+    getRequest(queryURL).then(function () {
+      addUserBtn.style.visibility = "visible";
+    })["catch"](function () {
+      addUserBtn.style.visibility = "hidden";
+    });
+  }
 };
