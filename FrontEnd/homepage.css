@@ -78,12 +78,6 @@
     margin-left: 10px;
 }
 
-/* #project-title {
-    display: flex;
-    justify-content: center;
-    font-size: 50px;
-} */
-
 #result{
     display: flex;
     justify-content: center;
@@ -92,8 +86,8 @@
 
 .password-form {
     margin-top: 20px;
-    margin-left: 30px;
-    /* text-align: center; */
+    margin-left: 50px;
+    font-size: 20px;
 }
 
 .password-crack-result {
