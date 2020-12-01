@@ -106,9 +106,12 @@ function createUserForm(userID) {
     form.onsubmit = function(e) {
         e.preventDefault();
         const password = input.value;
-        submitPassword(password, portNum, userID, result, input);
+        if (result.textContent !== 'Pending') {
+            submitPassword(password, portNum, userID, result, input);
+        } else {
+            alert('The cracking is running!');
+        }
     }
-
     return form;
 }
 
@@ -138,8 +141,6 @@ portNumForm.onsubmit = (event) => {
             addUserBtn.style.visibility = "hidden";
         })
     }
-
-    
 }
     
 
