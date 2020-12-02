@@ -17,6 +17,8 @@ public class Main {
             return;
         }
 
+        System.out.println("The worker is working on port: " + portNumber);
+
         while (true) {
             try {
                 ServerSocket serverSocket = new ServerSocket(portNumber);
