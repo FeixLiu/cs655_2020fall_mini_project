@@ -1,6 +1,4 @@
-import java.io.BufferedReader;
 import java.io.FileInputStream;
-import java.io.FileReader;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
@@ -32,7 +30,7 @@ public class Config {
             }
             sc.close();
             System.out.println(workerMap.toString());
-        } catch (IOException e) {
+        } catch (IOException ignored) {
         }
     }
 }

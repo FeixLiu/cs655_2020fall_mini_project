@@ -1,39 +1,55 @@
-#user-amount-port-number-form {
+#port-number-form {
     text-align: center;
     font-size: 25px;
+    display: flex;
+    align-items: center;
+    position: relative;
+    margin: 30px;
 }
 
-#user-amount-input-field {
-    border-radius: 30px;
-    text-align: center;
-    line-height: 2;
-    border: darkgray 1px solid;
-    outline: none;
-    margin-top: 40px;
-    font-size: 20px;
+#title {
+    font-size: 50px;
+    margin-left: 30px;
+}
+
+#sub-title {
+    margin-left: 30px;
 }
 
 #port-number-input-field {
     border-radius: 30px;
     text-align: center;
     line-height: 2;
+    margin-left: 20px;
+    margin-right: 20px;
     border: darkgray 1px solid;
     outline: none;
-    margin-top: 40px;
     font-size: 20px;
 }
+#port-number-submit-button {
+    outline: none;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+}
+#port-number-icon {
+    width: 40px;
+    height: 40px;
+    filter: invert(22%) sepia(93%) saturate(1352%) hue-rotate(87deg) brightness(119%) contrast(119%);
+}
 
-#user-amount-port-number-submit-button {
+#add-button {
     height: 50px;
     border-radius: 25px;
     color:white;
     outline: none;
     border: none;
-    background: rgb(177, 0, 0);
+    margin-left: 20px;
+    background: rgb(255,78,57);
     cursor: pointer;
-    width: 100px;
-    margin-top: 50px;
+    width: 150px;
     font-size: 20px;
+    visibility: hidden;
 }
 
 .password-input-field {
@@ -52,18 +68,24 @@
     color:white;
     outline: none;
     border: none;
+    background: rgb(53, 163, 68);
+    font-size: 15px;
+    cursor: pointer;
+    width: 80px;
+    margin-left: 20px;
+}
+
+.remove-button {
+    height: 40px;
+    border-radius: 25px;
+    color:white;
+    outline: none;
+    border: none;
     background: lightslategrey;
     font-size: 15px;
     cursor: pointer;
     width: 80px;
     margin-left: 10px;
-    
-}
-
-#project-title {
-    display: flex;
-    justify-content: center;
-    font-size: 50px;
 }
 
 #result{
@@ -73,8 +95,9 @@
 }
 
 .password-form {
+    font-size: 20px;
+    margin-left: 50px;
     margin-top: 20px;
-    text-align: center;
 }
 
 .password-crack-result {
