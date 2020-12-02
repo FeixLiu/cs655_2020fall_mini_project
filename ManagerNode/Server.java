@@ -48,7 +48,7 @@ public class Server {
         String configFilename = args[1];
         Config.init(configFilename);
 
-//        Server server = new Server(portNumber);
-//        server.init();
+        Server server = new Server(portNumber);
+        server.init();
     }
 }
