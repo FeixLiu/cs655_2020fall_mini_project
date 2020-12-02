@@ -24,7 +24,7 @@ public class ServerThread implements Runnable{
             message = message.split(" ")[1];
             String key = message.substring(6, 38);
             int userId = Integer.parseInt(message.substring(42));
-            System.out.println("Received a request: " + key);
+            System.out.println("The worker: " + id + " received a request: " + key);
 
             String rst = getResult(key, worker.workerIp, worker.managerIp, worker.port);
 
@@ -44,7 +44,6 @@ public class ServerThread implements Runnable{
 
             inputStream.close();
             outputStream.close();
-//            System.out.println("Set avail id " + this.id + " to true");
             Server.avail[this.id].set(true);
         } catch (Exception e) {
             e.printStackTrace();
@@ -77,7 +76,7 @@ public class ServerThread implements Runnable{
             Socket workerSender = new Socket(targetIp, port);
             OutputStream outputStreamWorker = workerSender.getOutputStream();
             BufferedWriter bwWorker = new BufferedWriter(new OutputStreamWriter(outputStreamWorker));
-            System.out.println("Sending the request to the worker: " + targetIp);
+            System.out.println("The worker: " + id + " sent the request to: " + targetIp);
             bwWorker.write("key:" + key + ",ip:" + selfIp + ",port:" + rstPort);
             bwWorker.flush();
             outputStreamWorker.close();
@@ -90,8 +89,8 @@ public class ServerThread implements Runnable{
             String rst = brWorker.readLine();
             inputStreamWorker.close();
             serverSocket.close();
-            System.out.println("Get result from the worker: " + targetIp);
-            System.out.println("Get result for: " + key + " is: " + rst);
+            System.out.println("The worker: " + id + " got result from: " + targetIp);
+            System.out.println("The worker: " + id + " got result for: " + key + " is: " + rst);
             return rst;
         } catch (Exception e) {
             e.printStackTrace();
