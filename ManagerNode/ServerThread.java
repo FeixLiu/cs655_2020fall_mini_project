@@ -26,9 +26,12 @@ public class ServerThread implements Runnable{
             int userId = Integer.parseInt(message.substring(42));
             System.out.println("The worker: " + id + " received a request: " + key);
 
+            long startTime = System.currentTimeMillis();
+
             String rst = getResult(key, worker.workerIp, worker.managerIp, worker.port);
 
-            long startTime = System.currentTimeMillis();
+            long endTime = System.currentTimeMillis();
+            System.out.println("The worker: " + id + " used " + ((double)(endTime - startTime)) / 1000.0 + " seconds for the request: " + key);
 
             String response = "";
             response += "HTTP/1.1 200 OK\n";
@@ -37,9 +40,6 @@ public class ServerThread implements Runnable{
             response += "Content-Length: " + rst.length() + '\n';
             response += "\n";
             response += rst;
-
-            long endTime = System.currentTimeMillis();
-            System.out.println("The worker: " + id + " used " + ((double)(endTime - startTime)) / 1000.0 + " seconds for the request: " + key);
 
             OutputStream outputStream = socket.getOutputStream();
             BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(outputStream));
