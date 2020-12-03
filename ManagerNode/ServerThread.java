@@ -23,9 +23,12 @@ public class ServerThread implements Runnable{
 
             message = message.split(" ")[1];
             String key = message.substring(6, 38);
-
             System.out.println("The worker: " + id + " received a request: " + key);
+
+            long startTime = System.currentTimeMillis();
             String rst = getResult(key, worker.workerIp, worker.managerIp, worker.port);
+            long endTime = System.currentTimeMillis();
+            System.out.println("The worker: " + id + " used " + ((double)(endTime - startTime)) / 1000.0 + " seconds for the request: " + key);
 
             String response = "";
             response += "HTTP/1.1 200 OK\n";
@@ -34,6 +37,8 @@ public class ServerThread implements Runnable{
             response += "Content-Length: " + rst.length() + '\n';
             response += "\n";
             response += rst;
+
+            System.out.println("The response is: " + response);
 
             OutputStream outputStream = socket.getOutputStream();
             BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(outputStream));
@@ -71,7 +76,6 @@ public class ServerThread implements Runnable{
                     rstPort++;
                 }
             }
-            long startTime = System.currentTimeMillis();
             Socket workerSender = new Socket(targetIp, port);
             OutputStream outputStreamWorker = workerSender.getOutputStream();
             BufferedWriter bwWorker = new BufferedWriter(new OutputStreamWriter(outputStreamWorker));
@@ -88,10 +92,8 @@ public class ServerThread implements Runnable{
             String rst = brWorker.readLine();
             inputStreamWorker.close();
             serverSocket.close();
-            long endTime = System.currentTimeMillis();
             System.out.println("The worker: " + id + " got result from: " + targetIp);
             System.out.println("The worker: " + id + " got result for: " + key + " is: " + rst);
-            System.out.println("The worker: " + id + " used " + ((double)(endTime - startTime)) / 1000.0 + " seconds for the request: " + key);
             return rst;
         } catch (Exception e) {
             e.printStackTrace();
