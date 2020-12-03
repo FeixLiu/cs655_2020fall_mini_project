@@ -29,7 +29,16 @@ public class Server {
                 InputStream inputStream = client.getInputStream();
                 BufferedReader br = new BufferedReader(new InputStreamReader(inputStream));
                 String message = br.readLine();
-                if (message.contains("connection-check")) {
+                if (message == null) {
+                    System.out.println("Received an invalid request.");
+                    String response = "";
+                    OutputStream outputStream = client.getOutputStream();
+                    BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(outputStream));
+                    bw.write(response);
+                    bw.flush();
+                    client.close();
+                }
+                else if (message.contains("connection-check")) {
                     System.out.println("Received a connection check request.");
                     String response = "";
                     response += "HTTP/1.1 200 OK\n";
