@@ -21,11 +21,10 @@ public class Server {
     public void init() {
         try {
             System.out.println("Server started on port: " + port);
-            ServerSocket serverSocket = new ServerSocket(port);
+            ServerSocket serverSocket = new ServerSocket(port, 10);
             new QueueThread();
             while (true) {
                 Socket client = serverSocket.accept(); // connect successfully
-                System.out.println(client.toString());
                 InputStream inputStream = client.getInputStream();
                 BufferedReader br = new BufferedReader(new InputStreamReader(inputStream));
                 String message = br.readLine();
