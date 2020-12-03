@@ -38,8 +38,6 @@ public class ServerThread implements Runnable{
             response += "\n";
             response += rst;
 
-            System.out.println("The response is: " + response);
-
             OutputStream outputStream = socket.getOutputStream();
             BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(outputStream));
             bw.write(response);
