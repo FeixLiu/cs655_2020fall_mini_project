@@ -1,14 +1,13 @@
 import java.io.*;
-import java.net.Socket;
-import java.net.ServerSocket;
+import java.net.*;
 
-public class ServerThread implements Runnable{
+public class ManagerThread implements Runnable{
     private Socket socket;
     private WorkerInfo worker;
     private int id;
     private String message;
 
-    public ServerThread(ClientInfo clientInfo, WorkerInfo worker, int id) {
+    public ManagerThread(ClientInfo clientInfo, WorkerInfo worker, int id) {
         this.socket = clientInfo.client;
         this.message = clientInfo.message;
         this.worker = worker;
@@ -42,7 +41,7 @@ public class ServerThread implements Runnable{
             bw.flush();
 
             outputStream.close();
-            Server.avail[this.id].set(true);
+            Manager.avail[this.id].set(true);
         } catch (Exception e) {
             e.printStackTrace();
         } finally {

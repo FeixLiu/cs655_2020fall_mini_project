@@ -2,13 +2,6 @@ import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
 
 public class Utils {
-    public static void printArr(int[] arr){
-        for (int value : arr) {
-            System.out.print(value + " ");
-        }
-        System.out.println();
-    }
-
     public static String findNextStr(String str){
         StringBuilder result = new StringBuilder();
         if(str.matches("[Z]+")) return result.toString();
@@ -55,7 +48,6 @@ public class Utils {
 
     public static String encryptMD5(String dataStr) {
         try {
-//            dataStr = dataStr + salt;
             MessageDigest m = MessageDigest.getInstance("MD5");
             m.update(dataStr.getBytes(StandardCharsets.UTF_8));
             byte[] s = m.digest();

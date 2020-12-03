@@ -7,10 +7,10 @@ public class QueueThread implements Runnable{
     public void run() {
         try {
             while(true) {
-                if (Server.clientQueue.isEmpty()) continue;
-                for (int i = 0; i < Server.avail.length; i++) {
-                    if (Server.avail[i].compareAndSet(true, false) && !Server.clientQueue.isEmpty()) {
-                        new ServerThread(Server.clientQueue.poll(), Config.workerMap.get(i), i);
+                if (Manager.clientQueue.isEmpty()) continue;
+                for (int i = 0; i < Manager.avail.length; i++) {
+                    if (Manager.avail[i].compareAndSet(true, false) && !Manager.clientQueue.isEmpty()) {
+                        new ManagerThread(Manager.clientQueue.poll(), Config.workerMap.get(i), i);
                         break;
                     }
                 }

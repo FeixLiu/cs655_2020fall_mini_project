@@ -1,24 +1,16 @@
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 import java.io.*;
-import java.net.ServerSocket;
-import java.net.Socket;
+import java.net.*;
 
 public class Worker {
+    private int portNumber;
 
-    public static void main(String[] args){
-        if (args.length == 0) {
-            System.out.println("Missing required params.");
-            return;
-        }
-        int portNumber = Integer.parseInt(args[0]);
-        if (portNumber < 58000 || portNumber > 58999) {
-            System.out.println("Port number is invalid.");
-            return;
-        }
+    public Worker(int port) {
+        this.portNumber = port;
+    }
 
+    public void init(){
         System.out.println("The worker is working on port: " + portNumber);
-
         while (true) {
             try {
                 ServerSocket serverSocket = new ServerSocket(portNumber);
@@ -51,5 +43,20 @@ public class Worker {
                 e.printStackTrace();
             }
         }
+    }
+
+    public static void main(String[] args) {
+        if (args.length == 0) {
+            System.out.println("Missing required params.");
+            return;
+        }
+        int portNumber = Integer.parseInt(args[0]);
+        if (portNumber < 58000 || portNumber > 58999) {
+            System.out.println("Port number is invalid.");
+            return;
+        }
+
+        Worker worker = new Worker(portNumber);
+        worker.init();
     }
 }
