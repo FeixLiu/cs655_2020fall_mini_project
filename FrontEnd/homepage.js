@@ -2,6 +2,7 @@ const portNumForm = document.getElementById('port-number-form');
 const portNumInputField = document.getElementById('port-number-input-field');
 const addUserBtn = document.getElementById('add-button');
 const BASE_URL = 'pcvm3-8.instageni.cenic.net';
+const PASSWORD_LEN = 5;
 
 let userNum = 0;
 let portNum;
@@ -16,13 +17,13 @@ function checkPortNumber(portNumer) {
     return reg.test(portNumer);
 }
 
-function randomString() {    
-    e = 5;
-    var t = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz",
-    a = t.length,
-    n = "";
-    for (i = 0; i < e; i++) n += t.charAt(Math.floor(Math.random() * a));
-    return n
+function randomString(len) {
+    let t = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz",
+    res = "";
+    for (let i = 0; i < len; i++) {
+        n += t.charAt(Math.floor(Math.random() * t.length));
+    }
+    return res;
 }
 
 function getRequest(requestURl) {
@@ -80,9 +81,9 @@ function createUserForm(userID) {
     const input = document.createElement('input');
     input.type = 'text';
     input.className = 'password-input-field';
-    input.placeholder = '5-character password';
-    input.maxLength = 5;
-    input.minLength = 5;
+    input.placeholder = `${PASSWORD_LEN}-character password`;
+    input.maxLength = PASSWORD_LEN;
+    input.minLength = PASSWORD_LEN;
 
     const submitBtn = document.createElement('button');
     submitBtn.className = 'submit-button';
@@ -113,7 +114,7 @@ function createUserForm(userID) {
 
     randomBtm.onclick = () => {
         if (result.textContent !== 'Pending') {
-            input.value = randomString();
+            input.value = randomString(PASSWORD_LEN);
         } else {
             alert('The cracking is running!');
         }
@@ -156,12 +157,13 @@ portNumForm.onsubmit = (event) => {
     if (portNum === '') {
         alert('Please input a port number.');
     } else {
-        const queryURL = `http://${BASE_URL}:${portNum}?key=${connection-check}`;
-        getRequest(queryURL).then(() =>{
-            addUserBtn.style.visibility = "visible";
-        }).catch(() => {
-            addUserBtn.style.visibility = "hidden";
-        })
+        // const queryURL = `http://${BASE_URL}:${portNum}?key=connection-check`;
+        // getRequest(queryURL).then(() =>{
+        //     addUserBtn.style.visibility = "visible";
+        // }).catch(() => {
+        //     addUserBtn.style.visibility = "hidden";
+        // })
+        addUserBtn.style.visibility = "visible";
     }
 }
     
