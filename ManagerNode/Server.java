@@ -21,7 +21,7 @@ public class Server {
     public void init() {
         try {
             System.out.println("Server started on port: " + port);
-            ServerSocket serverSocket = new ServerSocket(port, 100);
+            ServerSocket serverSocket = new ServerSocket(port, 1000);
             new QueueThread();
             while (true) {
                 Socket client = serverSocket.accept(); // connect successfully
