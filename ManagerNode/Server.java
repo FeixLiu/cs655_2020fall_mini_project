@@ -1,5 +1,8 @@
+import java.io.*;
 import java.net.ServerSocket;
 import java.net.Socket;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.LinkedBlockingQueue;
 import java.util.concurrent.atomic.AtomicBoolean;
@@ -7,7 +10,7 @@ import java.util.concurrent.atomic.AtomicBoolean;
 public class Server {
     public int port;
     public static AtomicBoolean[] avail;
-    public static BlockingQueue<Socket> clientQueue = new LinkedBlockingQueue<>();
+    public static BlockingQueue<Map<Socket, String>> clientQueue = new LinkedBlockingQueue<>();
 
     public Server(int port) {
         avail = new AtomicBoolean[Config.NUM_OF_WORKER];
@@ -24,7 +27,30 @@ public class Server {
             new QueueThread();
             while (true) {
                 Socket client = serverSocket.accept(); // connect successfully
-                clientQueue.add(client);
+                InputStream inputStream = client.getInputStream();
+                BufferedReader br = new BufferedReader(new InputStreamReader(inputStream));
+                String message = br.readLine();
+                inputStream.close();
+                if (message.contains("connection-check")) {
+                    String response = "";
+                    response += "HTTP/1.1 200 OK\n";
+                    response += "Access-Control-Allow-Origin:*\n";
+                    response += "Content-Type: text\\plain\n";
+                    response += "Content-Length: " + "OK".length() + '\n';
+                    response += "\n";
+                    response += "OK";
+
+                    OutputStream outputStream = client.getOutputStream();
+                    BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(outputStream));
+                    bw.write(response);
+                    bw.flush();
+                    outputStream.close();
+                    client.close();
+                } else {
+                    Map<Socket, String> map = new HashMap<>();
+                    map.put(client, message);
+                    clientQueue.add(map);
+                }
             }
         } catch (Exception e) {
             e.printStackTrace();
