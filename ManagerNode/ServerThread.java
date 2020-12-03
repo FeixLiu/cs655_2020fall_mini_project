@@ -63,7 +63,6 @@ public class ServerThread implements Runnable{
 
     public String getResult(String key, String targetIp, String selfIp, int port) {
         try {
-            System.out.println(port);
             // assign the task to a worker
             ServerSocket serverSocket;
             int rstPort = 58000;
