@@ -4,7 +4,7 @@ import java.io.*;
 import java.net.ServerSocket;
 import java.net.Socket;
 
-public class Main {
+public class Worker {
 
     public static void main(String[] args){
         if (args.length == 0) {

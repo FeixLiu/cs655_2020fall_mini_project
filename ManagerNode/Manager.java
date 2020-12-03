@@ -5,12 +5,12 @@ import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.LinkedBlockingQueue;
 import java.util.concurrent.atomic.AtomicBoolean;
 
-public class Server {
+public class Manager {
     public int port;
     public static AtomicBoolean[] avail;
     public static BlockingQueue<ClientInfo> clientQueue = new LinkedBlockingQueue<>();
 
-    public Server(int port) {
+    public Manager(int port) {
         avail = new AtomicBoolean[Config.NUM_OF_WORKER];
         for(int i = 0; i < avail.length; i++) {
             avail[i] = new AtomicBoolean(true);
@@ -82,7 +82,7 @@ public class Server {
         String configFilename = args[1];
         Config.init(configFilename);
 
-        Server server = new Server(portNumber);
+        Manager server = new Manager(portNumber);
         server.init();
     }
 }

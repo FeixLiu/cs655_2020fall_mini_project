@@ -17,5 +17,5 @@ sudo echo '  }' >> /etc/nginx/conf.d/static-naice-me.conf
 sudo echo '}' >> /etc/nginx/conf.d/static-naice-me.conf
 sudo nginx -s reload
 cd cs655_2020fall_mini_project-password_cracker_v1.0/ManagerNode
-sudo javac Server.java
+sudo javac Manager.java
 sudo java Server 58888 info
