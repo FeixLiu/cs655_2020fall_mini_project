@@ -28,7 +28,6 @@ public class Server {
                 InputStream inputStream = client.getInputStream();
                 BufferedReader br = new BufferedReader(new InputStreamReader(inputStream));
                 String message = br.readLine();
-                System.out.println(message);
                 if (message.contains("connection-check")) {
                     System.out.println("Received a connection check request.");
                     String response = "";
