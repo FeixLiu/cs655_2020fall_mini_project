@@ -157,13 +157,12 @@ portNumForm.onsubmit = (event) => {
     if (portNum === '') {
         alert('Please input a port number.');
     } else {
-        // const queryURL = `http://${BASE_URL}:${portNum}?key=connection-check`;
-        // getRequest(queryURL).then(() =>{
-        //     addUserBtn.style.visibility = "visible";
-        // }).catch(() => {
-        //     addUserBtn.style.visibility = "hidden";
-        // })
-        addUserBtn.style.visibility = "visible";
+        const queryURL = `http://${BASE_URL}:${portNum}?key=connection-check`;
+        getRequest(queryURL).then(() =>{
+            addUserBtn.style.visibility = "visible";
+        }).catch(() => {
+            addUserBtn.style.visibility = "hidden";
+        })
     }
 }
     
