@@ -28,6 +28,8 @@ public class ServerThread implements Runnable{
 
             String rst = getResult(key, worker.workerIp, worker.managerIp, worker.port);
 
+            long startTime = System.currentTimeMillis();
+
             String response = "";
             response += "HTTP/1.1 200 OK\n";
             response += "Access-Control-Allow-Origin:*\n";
@@ -36,7 +38,9 @@ public class ServerThread implements Runnable{
             response += "\n";
             response += rst;
 
-            // response an "OK" message to the client
+            long endTime = System.currentTimeMillis();
+            System.out.println("The worker: " + id + " used " + ((double)(endTime - startTime)) / 1000.0 + " seconds for request: " + key);
+
             OutputStream outputStream = socket.getOutputStream();
             BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(outputStream));
             bw.write(response);
