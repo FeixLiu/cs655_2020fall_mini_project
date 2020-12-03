@@ -21,22 +21,30 @@ public class ServerThread implements Runnable{
             BufferedReader br = new BufferedReader(new InputStreamReader(inputStream));
             String message = br.readLine();
 
-            message = message.split(" ")[1];
-            String key = message.substring(6, 38);
-            System.out.println("The worker: " + id + " received a request: " + key);
-
-            long startTime = System.currentTimeMillis();
-            String rst = getResult(key, worker.workerIp, worker.managerIp, worker.port);
-            long endTime = System.currentTimeMillis();
-            System.out.println("The worker: " + id + " used " + ((double)(endTime - startTime)) / 1000.0 + " seconds for the request: " + key);
-
+            boolean connection = false;
             String response = "";
-            response += "HTTP/1.1 200 OK\n";
-            response += "Access-Control-Allow-Origin:*\n";
-            response += "Content-Type: text\\plain\n";
-            response += "Content-Length: " + rst.length() + '\n';
-            response += "\n";
-            response += rst;
+            if (message.equals("connection-check"))
+                connection = true;
+
+            if (!connection) {
+                message = message.split(" ")[1];
+                String key = message.substring(6, 38);
+                System.out.println("The worker: " + id + " received a request: " + key);
+
+                long startTime = System.currentTimeMillis();
+                String rst = getResult(key, worker.workerIp, worker.managerIp, worker.port);
+                long endTime = System.currentTimeMillis();
+                System.out.println("The worker: " + id + " used " + ((double) (endTime - startTime)) / 1000.0 + " seconds for the request: " + key);
+
+                response += "HTTP/1.1 200 OK\n";
+                response += "Access-Control-Allow-Origin:*\n";
+                response += "Content-Type: text\\plain\n";
+                response += "Content-Length: " + rst.length() + '\n';
+                response += "\n";
+                response += rst;
+            } else {
+                response = "OK";
+            }
 
             OutputStream outputStream = socket.getOutputStream();
             BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(outputStream));
