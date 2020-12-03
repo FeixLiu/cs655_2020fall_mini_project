@@ -29,6 +29,7 @@ public class Server {
                 BufferedReader br = new BufferedReader(new InputStreamReader(inputStream));
                 String message = br.readLine();
                 if (message.contains("connection-check")) {
+                    System.out.println("Received a connection check request.");
                     String response = "";
                     response += "HTTP/1.1 200 OK\n";
                     response += "Access-Control-Allow-Origin:*\n";
