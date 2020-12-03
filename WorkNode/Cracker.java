@@ -5,7 +5,7 @@ public class Cracker {
     public static String findPassword(List<String[]> list, String target){
         int count = 0;
         for (String[] pair : list) {
-            if (pair.length != 2) return "------------";
+            if (pair.length != 2) return null;
             String begin = pair[0];
             String end = pair[1];
             String str = begin;
@@ -24,7 +24,7 @@ public class Cracker {
             }
             if (flag && str != null && !str.equals("")) return str;
         }
-        return "-------";
+        return null;
     }
 
 }
