@@ -1,7 +1,8 @@
 const portNumForm = document.getElementById('port-number-form');
 const portNumInputField = document.getElementById('port-number-input-field');
 const addUserBtn = document.getElementById('add-button');
-const BASE_URL = 'pcvm3-8.instageni.cenic.net';
+// const BASE_URL = 'pcvm3-8.instageni.cenic.net';
+const BASE_URL = 'pcvm3-10.instageni.illinois.edu';
 
 let userNum = 0;
 let portNum;
