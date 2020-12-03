@@ -16,6 +16,15 @@ function checkPortNumber(portNumer) {
     return reg.test(portNumer);
 }
 
+function randomString() {    
+    e = 5;
+    var t = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz",
+    a = t.length,
+    n = "";
+    for (i = 0; i < e; i++) n += t.charAt(Math.floor(Math.random() * a));
+    return n
+}
+
 function getRequest(requestURl) {
     return new Promise((resolve, reject) => {
         fetch(requestURl, {
@@ -40,7 +49,6 @@ function submitPassword(password, portNum, userID, resultEle, inputEle) {
     if (!checkPassword(password) || !(checkPortNumber(portNum))) {
         alert('Invalid value.');
     } else {
-       
         const md5Password = hex_md5(password);
         const queryURL = `http://${BASE_URL}:${portNum}?key=${md5Password}&id=${userID}`;
         let startTime = new Date();
@@ -81,6 +89,12 @@ function createUserForm(userID) {
     submitBtn.type = 'submit';
     submitBtn.textContent = 'Submit';
 
+    const randomBtm = document.createElement('button');
+    randomBtm.className = 'random-button';
+    randomBtm.type = 'button';
+    randomBtm.textContent = 'Random';
+    
+
     const result = document.createElement('label');
     result.id = `password-crack-result-${userID}`;
     result.className = 'password-crack-result';
@@ -97,8 +111,17 @@ function createUserForm(userID) {
         }
     }
 
+    randomBtm.onclick = () => {
+        if (result.textContent !== 'Pending') {
+            input.value = randomString();
+        } else {
+            alert('The cracking is running!');
+        }
+    }
+
     form.appendChild(userLabel);
     form.appendChild(input);
+    form.appendChild(randomBtm);
     form.appendChild(submitBtn);
     form.appendChild(removeBtn);
     form.appendChild(result);
