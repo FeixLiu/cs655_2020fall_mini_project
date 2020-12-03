@@ -26,34 +26,30 @@ public class Server {
             while (true) {
                 Socket client = serverSocket.accept(); // connect successfully
                 System.out.println(client.toString());
-//                InputStream inputStream = client.getInputStream();
-//                BufferedReader br = new BufferedReader(new InputStreamReader(inputStream));
-//                String message = br.readLine();
-                ClientInfo clientInfo = new ClientInfo();
-                //clientInfo.message = message;
-                clientInfo.client = client;
-                clientQueue.add(clientInfo);
-//                if (message.contains("connection-check")) {
-//                    System.out.println("Received a connection check request.");
-//                    String response = "";
-//                    response += "HTTP/1.1 200 OK\n";
-//                    response += "Access-Control-Allow-Origin:*\n";
-//                    response += "Content-Type: text\\plain\n";
-//                    response += "Content-Length: " + "OK".length() + '\n';
-//                    response += "\n";
-//                    response += "OK";
-//
-//                    OutputStream outputStream = client.getOutputStream();
-//                    BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(outputStream));
-//                    bw.write(response);
-//                    bw.flush();
-//                    client.close();
-//                } else {
-//                    ClientInfo clientInfo = new ClientInfo();
-//                    clientInfo.message = message;
-//                    clientInfo.client = client;
-//                    clientQueue.add(clientInfo);
-//                }
+                InputStream inputStream = client.getInputStream();
+                BufferedReader br = new BufferedReader(new InputStreamReader(inputStream));
+                String message = br.readLine();
+                if (message.contains("connection-check")) {
+                    System.out.println("Received a connection check request.");
+                    String response = "";
+                    response += "HTTP/1.1 200 OK\n";
+                    response += "Access-Control-Allow-Origin:*\n";
+                    response += "Content-Type: text\\plain\n";
+                    response += "Content-Length: " + "OK".length() + '\n';
+                    response += "\n";
+                    response += "OK";
+
+                    OutputStream outputStream = client.getOutputStream();
+                    BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(outputStream));
+                    bw.write(response);
+                    bw.flush();
+                    client.close();
+                } else {
+                    ClientInfo clientInfo = new ClientInfo();
+                    clientInfo.message = message;
+                    clientInfo.client = client;
+                    clientQueue.add(clientInfo);
+                }
             }
         } catch (Exception e) {
             e.printStackTrace();

@@ -6,11 +6,11 @@ public class ServerThread implements Runnable{
     private Socket socket;
     private WorkerInfo worker;
     private int id;
-    //private String message;
+    private String message;
 
     public ServerThread(ClientInfo clientInfo, WorkerInfo worker, int id) {
         this.socket = clientInfo.client;
-        //this.message = clientInfo.message;
+        this.message = clientInfo.message;
         this.worker = worker;
         this.id = id;
         new Thread(this).start();
@@ -20,10 +20,7 @@ public class ServerThread implements Runnable{
     public void run() {
         try {
             // process the message sent from the client
-            //message = message.split(" ")[1];
-            InputStream inputStream = socket.getInputStream();
-            BufferedReader br = new BufferedReader(new InputStreamReader(inputStream));
-            String message = br.readLine();
+            message = message.split(" ")[1];
             String key = message.substring(6, 38);
             System.out.println("The worker: " + id + " received a request: " + key);
 
