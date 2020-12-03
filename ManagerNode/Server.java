@@ -25,6 +25,7 @@ public class Server {
             new QueueThread();
             while (true) {
                 Socket client = serverSocket.accept(); // connect successfully
+                System.out.println(client.toString());
                 InputStream inputStream = client.getInputStream();
                 BufferedReader br = new BufferedReader(new InputStreamReader(inputStream));
                 String message = br.readLine();
