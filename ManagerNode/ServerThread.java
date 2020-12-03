@@ -23,6 +23,9 @@ public class ServerThread implements Runnable{
 
             boolean connection = false;
             String response = "";
+            response += "HTTP/1.1 200 OK\n";
+            response += "Access-Control-Allow-Origin:*\n";
+            response += "Content-Type: text\\plain\n";
             if (message.contains("connection-check"))
                 connection = true;
 
@@ -36,14 +39,14 @@ public class ServerThread implements Runnable{
                 long endTime = System.currentTimeMillis();
                 System.out.println("The worker: " + id + " used " + ((double) (endTime - startTime)) / 1000.0 + " seconds for the request: " + key);
 
-                response += "HTTP/1.1 200 OK\n";
-                response += "Access-Control-Allow-Origin:*\n";
-                response += "Content-Type: text\\plain\n";
                 response += "Content-Length: " + rst.length() + '\n';
                 response += "\n";
                 response += rst;
             } else {
-                response = "OK";
+                System.out.println("Received a connection check request.");
+                response += "Content-Length: " + "OK".length() + '\n';
+                response += "\n";
+                response += "OK";
             }
 
             OutputStream outputStream = socket.getOutputStream();
