@@ -45,7 +45,6 @@ public class Server {
                     bw.write(response);
                     bw.flush();
                     outputStream.close();
-                    client.close();
                 } else {
                     Map<Socket, String> map = new HashMap<>();
                     map.put(client, message);
