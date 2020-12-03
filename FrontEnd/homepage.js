@@ -156,8 +156,7 @@ portNumForm.onsubmit = (event) => {
     if (portNum === '') {
         alert('Please input a port number.');
     } else {
-        const md5Password = hex_md5("aaaaa");
-        const queryURL = `http://${BASE_URL}:${portNum}?key=${md5Password}&id=${-1}`;
+        const queryURL = `http://${BASE_URL}:${portNum}?key=${connection-check}`;
         getRequest(queryURL).then(() =>{
             addUserBtn.style.visibility = "visible";
         }).catch(() => {
