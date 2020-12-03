@@ -1,8 +1,6 @@
 import java.io.*;
 import java.net.ServerSocket;
 import java.net.Socket;
-import java.util.HashMap;
-import java.util.Map;
 import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.LinkedBlockingQueue;
 import java.util.concurrent.atomic.AtomicBoolean;
@@ -10,7 +8,7 @@ import java.util.concurrent.atomic.AtomicBoolean;
 public class Server {
     public int port;
     public static AtomicBoolean[] avail;
-    public static BlockingQueue<Map<Socket, String>> clientQueue = new LinkedBlockingQueue<>();
+    public static BlockingQueue<ClientInfo> clientQueue = new LinkedBlockingQueue<>();
 
     public Server(int port) {
         avail = new AtomicBoolean[Config.NUM_OF_WORKER];
@@ -45,9 +43,10 @@ public class Server {
                     bw.flush();
                     client.close();
                 } else {
-                    Map<Socket, String> map = new HashMap<>();
-                    map.put(client, message);
-                    clientQueue.add(map);
+                    ClientInfo clientInfo = new ClientInfo();
+                    clientInfo.message = message;
+                    clientInfo.client = client;
+                    clientQueue.add(clientInfo);
                 }
             }
         } catch (Exception e) {

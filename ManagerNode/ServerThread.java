@@ -1,16 +1,16 @@
 import java.io.*;
 import java.net.Socket;
 import java.net.ServerSocket;
-import java.util.Map;
 
 public class ServerThread implements Runnable{
     private Socket socket;
     private WorkerInfo worker;
     private int id;
     private String message;
-    public ServerThread(Map<Socket, String> client, WorkerInfo worker, int id) {
-        this.socket = (Socket)client.keySet().toArray()[0];
-        this.message = (String)client.values().toArray()[0];
+
+    public ServerThread(ClientInfo clientInfo, WorkerInfo worker, int id) {
+        this.socket = clientInfo.client;
+        this.message = clientInfo.message;
         this.worker = worker;
         this.id = id;
         new Thread(this).start();
@@ -19,11 +19,7 @@ public class ServerThread implements Runnable{
     @Override
     public void run() {
         try {
-            // read the message sent from the client
-//            InputStream inputStream = socket.getInputStream();
-//            BufferedReader br = new BufferedReader(new InputStreamReader(inputStream));
-//            String message = br.readLine();
-
+            // process the message sent from the client
             message = message.split(" ")[1];
             String key = message.substring(6, 38);
             System.out.println("The worker: " + id + " received a request: " + key);
