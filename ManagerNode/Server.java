@@ -30,7 +30,6 @@ public class Server {
                 InputStream inputStream = client.getInputStream();
                 BufferedReader br = new BufferedReader(new InputStreamReader(inputStream));
                 String message = br.readLine();
-                inputStream.close();
                 if (message.contains("connection-check")) {
                     String response = "";
                     response += "HTTP/1.1 200 OK\n";
@@ -44,7 +43,7 @@ public class Server {
                     BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(outputStream));
                     bw.write(response);
                     bw.flush();
-                    outputStream.close();
+                    client.close();
                 } else {
                     Map<Socket, String> map = new HashMap<>();
                     map.put(client, message);
