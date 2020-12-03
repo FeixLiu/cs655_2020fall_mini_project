@@ -23,7 +23,7 @@ public class ServerThread implements Runnable{
 
             boolean connection = false;
             String response = "";
-            if (message.equals("connection-check"))
+            if (message.contains("connection-check"))
                 connection = true;
 
             if (!connection) {
