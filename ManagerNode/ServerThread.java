@@ -39,7 +39,7 @@ public class ServerThread implements Runnable{
             response += rst;
 
             long endTime = System.currentTimeMillis();
-            System.out.println("The worker: " + id + " used " + ((double)(endTime - startTime)) / 1000.0 + " seconds for request: " + key);
+            System.out.println("The worker: " + id + " used " + ((double)(endTime - startTime)) / 1000.0 + " seconds for the request: " + key);
 
             OutputStream outputStream = socket.getOutputStream();
             BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(outputStream));
