@@ -7,4 +7,5 @@ sudo wget --no-check-certificate --no-cache --no-cookies https://github.com/Feix
 sudo tar -zvxf password_cracker_v1.0.tar.gz
 cd cs655_2020fall_mini_project-password_cracker_v1.0/WorkNode
 sudo javac Worker.java
+clear
 sudo java Worker 58100
