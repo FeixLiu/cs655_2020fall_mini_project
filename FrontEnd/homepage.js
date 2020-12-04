@@ -21,7 +21,7 @@ function randomString(len) {
     let t = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz",
     res = "";
     for (let i = 0; i < len; i++) {
-        n += t.charAt(Math.floor(Math.random() * t.length));
+        res += t.charAt(Math.floor(Math.random() * t.length));
     }
     return res;
 }
