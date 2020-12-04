@@ -58,7 +58,12 @@ function submitPassword(password, portNum, userID, resultEle, inputEle) {
         getRequest(queryURL).then((res) => {
             console.log(res);
             let endTime = new Date();
-            resultEle.textContent = res.length === 5 ? `Result: ${res}. Runtime: ${(endTime-startTime) / 1000} s` : 'The worker is not started.';
+            if(res.length === 5){
+                resultEle.textContent = `Result: ${res}. Runtime: ${(endTime-startTime) / 1000} s`;
+            }
+            else{
+                alert('Internal Server Error!');
+            }
             inputEle.disabled = false;
         })
     }
