@@ -21,7 +21,7 @@ function randomString(len) {
     let t = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz",
     res = "";
     for (let i = 0; i < len; i++) {
-        n += t.charAt(Math.floor(Math.random() * t.length));
+        res += t.charAt(Math.floor(Math.random() * t.length));
     }
     return res;
 }
@@ -58,10 +58,10 @@ function submitPassword(password, portNum, userID, resultEle, inputEle) {
         getRequest(queryURL).then((res) => {
             console.log(res);
             let endTime = new Date();
-            resultEle.textContent = `Result: ${res}. Runtime: ${(endTime-startTime) / 1000} s`;
+            resultEle.textContent = res.length === 5 ? `Result: ${res}. Runtime: ${(endTime-startTime) / 1000} s` : 'The worker is not started.';
             inputEle.disabled = false;
         })
-    }   
+    }
 }
 
 function removeUserForm(userID) {
