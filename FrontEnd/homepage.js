@@ -63,6 +63,7 @@ function submitPassword(password, portNum, userID, resultEle, inputEle) {
             }
             else{
                 alert('Internal Server Error!');
+                resultEle.textContent = '';
             }
             inputEle.disabled = false;
         })
