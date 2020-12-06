@@ -82,10 +82,12 @@ function submitPassword(password, portNum, userID, resultEle, inputEle) {
         getRequest(queryURL).then((res) => {
             console.log(res);
             let endTime = new Date();
-            if (res.length === 5) {
-                resultEle.textContent = `Result: ${res}. Runtime: ${(endTime-startTime) / 1000} s`
-            } else {
-                alert ('Internal Server Error!');
+            if(res.length === 5){
+                resultEle.textContent = `Result: ${res}. Runtime: ${(endTime-startTime) / 1000} s`;
+            }
+            else{
+                alert('Internal Server Error!');
+                resultEle.textContent = '';
             }
             inputEle.disabled = false;
         })

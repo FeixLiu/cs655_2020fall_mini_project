@@ -55,6 +55,7 @@ public class Manager {
                     ClientInfo clientInfo = new ClientInfo();
                     clientInfo.message = message;
                     clientInfo.client = client;
+                    clientInfo.enqueueTime = System.currentTimeMillis();
                     clientQueue.add(clientInfo);
                 }
             }

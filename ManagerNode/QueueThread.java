@@ -10,7 +10,11 @@ public class QueueThread implements Runnable{
                 if (Manager.clientQueue.isEmpty()) continue;
                 for (int i = 0; i < Manager.avail.length; i++) {
                     if (Manager.avail[i].compareAndSet(true, false) && !Manager.clientQueue.isEmpty()) {
-                        new ManagerThread(Manager.clientQueue.poll(), Config.workerMap.get(i), i);
+                        ClientInfo clientInfo = Manager.clientQueue.poll();
+                        double queueTime = (double)(System.currentTimeMillis() - clientInfo.enqueueTime) / 1000.0;
+                        System.out.println("client: " + clientInfo.client.toString() + "finish queueing and assigned to worker " + i);
+                        System.out.println("Queue time is " + queueTime + "seconds");
+                        new ManagerThread(clientInfo, Config.workerMap.get(i), i);
                         break;
                     }
                 }
