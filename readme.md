@@ -5,6 +5,7 @@
 - Project: CS-655-Fall2020
 - Rspec file: https://raw.githubusercontent.com/FeixLiu/cs655_2020fall_mini_project/main/rspec.txt 
 - Web interface: http://pcvm3-8.instageni.cenic.net/
+- Video demo: https://www.youtube.com/watch?v=O6X7dvg7-DI&t=41s
 
 
 ## How to run
