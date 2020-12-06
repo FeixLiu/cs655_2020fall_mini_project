@@ -16,17 +16,17 @@
     <br>```wget https://raw.githubusercontent.com/FeixLiu/cs655_2020fall_mini_project/password_cracker_v1.0/RunningScripts/WorkerNode.sh```
     <br>```sudo bash WorkerNode.sh```
 - If run on your own GENI nodes, before run the scripts:
-    - In ManagerNode.sh
-        - Line 11, change the server name *pcvm3-8.instageni.cenic.net* : <br>
+    - In **ManagerNode.sh**
+        - Line 11, change the server name **pcvm3-8.instageni.cenic.net** : <br>
         ` sudo echo '  server_name pcvm3-8.instageni.cenic.net;' >> /etc/nginx/conf.d/static-naice-me.conf `
-        - Line 22, change the port number *58888* if necessary: <br>
+        - Line 22, change the port number **58888** if necessary: <br>
         ` sudo java Manager 58888 info `
-    - In WorkerNode.sh
-        - Line 11, change the port number *58100* if necessary: <br>
+    - In **WorkerNode.sh**
+        - Line 11, change the port number **58100** if necessary: <br>
         ` sudo java Worker 58100 `
-    - In cs655_2020fall_mini_project-password_cracker_v1.0/ManagerNode/info, change the configuration if necessary: 
-        - The first line is the number of workers
-        - The second line is the port number in WorkerNode.sh
+    - In **cs655_2020fall_mini_project-password_cracker_v1.0/ManagerNode/info**, change the configuration if necessary: 
+        - Line 1, the number of workers
+        - Line 2, the port number in **WorkerNode.sh**
         - The number of following lines are equal to the number of workers, the first ip is the ip address on manager node, and the second ip is the ip address on related worker node
         ```
           6
@@ -38,7 +38,7 @@
           10.10.5.2 10.10.5.1
           10.10.6.2 10.10.6.1
         ```
-    - On the web page, input the port number in the ManagerNode.sh.
+    - On the web page, input the port number in the **ManagerNode.sh**.
 
 ## Team members
 - Changhao Liang (U16843909)
