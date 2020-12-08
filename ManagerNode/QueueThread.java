@@ -1,4 +1,8 @@
+/**
+ * This class is a thread to deal with the client in the queue
+ */
 public class QueueThread implements Runnable{
+
     public QueueThread() {
         new Thread(this).start();
     }
@@ -9,6 +13,7 @@ public class QueueThread implements Runnable{
             while(true) {
                 if (Manager.clientQueue.isEmpty()) continue;
                 for (int i = 0; i < Manager.avail.length; i++) {
+                    //if a worker is available, start a thread to process the message and send request to worker node
                     if (Manager.avail[i].compareAndSet(true, false) && !Manager.clientQueue.isEmpty()) {
                         ClientInfo clientInfo = Manager.clientQueue.poll();
                         double queueTime = (double)(System.currentTimeMillis() - clientInfo.enqueueTime) / 1000.0;
