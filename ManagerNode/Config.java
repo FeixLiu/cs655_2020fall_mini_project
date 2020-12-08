@@ -3,6 +3,8 @@ import java.util.*;
 
 public class Config {
 
+    // read the configuration for the system from the file
+
     public static int NUM_OF_WORKER;
     public static int WORKER_PORT_NUM;
     public static Map<Integer, WorkerInfo> workerMap = new HashMap<>();
