@@ -11,6 +11,7 @@ public class Manager {
     public Manager(int port) {
         avail = new AtomicBoolean[Config.NUM_OF_WORKER];
         for(int i = 0; i < avail.length; i++) {
+            // set all workers are available at the beginning of the program
             avail[i] = new AtomicBoolean(true);
         }
         this.port = port;
@@ -26,8 +27,10 @@ public class Manager {
                 System.out.println(client.toString());
                 InputStream inputStream = client.getInputStream();
                 BufferedReader br = new BufferedReader(new InputStreamReader(inputStream));
+                // when a new connection is established, we will immediately read the request to classify the reqeust
                 String message = br.readLine();
                 if (message == null) {
+                    // invalid request
                     System.out.println("Received an invalid request.");
                     String response = "";
                     OutputStream outputStream = client.getOutputStream();
@@ -37,7 +40,9 @@ public class Manager {
                     client.close();
                 }
                 else if (message.contains("connection-check")) {
+                    // connection check request
                     System.out.println("Received a connection check request.");
+                    // if the message is the connection check message, simply response the front end with "OK"
                     String response = "";
                     response += "HTTP/1.1 200 OK\n";
                     response += "Access-Control-Allow-Origin:*\n";
@@ -52,6 +57,7 @@ public class Manager {
                     bw.flush();
                     client.close();
                 } else {
+                    // password crack request, save the connection info and the request into a queue
                     ClientInfo clientInfo = new ClientInfo();
                     clientInfo.message = message;
                     clientInfo.client = client;
